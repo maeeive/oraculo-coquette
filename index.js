@@ -1,4 +1,4 @@
-alert("ORACULO: index.js carregou");
+alert("ORACULO: carregou");
 
 setTimeout(() => {
 
@@ -7,12 +7,12 @@ setTimeout(() => {
     const container = document.createElement("div");
     container.id = "oraculo-container";
 
+    // posição inicial segura
     container.style.position = "fixed";
-    container.style.right = "10px";
-    container.style.top = "60%"; // <-- MUDANÇA IMPORTANTE
+    container.style.left = "20px";
+    container.style.top = "50%";
     container.style.transform = "translateY(-50%)";
-    container.style.zIndex = "9999999"; // <-- mais alto
-    container.style.pointerEvents = "auto";
+    container.style.zIndex = "9999999";
 
     container.innerHTML = `
         <div id="oraculo-btn" style="
@@ -23,9 +23,10 @@ setTimeout(() => {
             display:flex;
             align-items:center;
             justify-content:center;
-            cursor:pointer;
+            cursor:grab;
             font-size:22px;
             box-shadow:0 0 15px rgba(0,0,0,0.5);
+            user-select:none;
         ">
             🎀
         </div>
@@ -33,9 +34,8 @@ setTimeout(() => {
         <div id="oraculo-pop" style="
             display:none;
             position:absolute;
-            right:60px;
-            top:50%;
-            transform:translateY(-50%);
+            left:65px;
+            top:0;
             width:220px;
             background:#111;
             color:white;
@@ -58,14 +58,18 @@ setTimeout(() => {
 
     document.body.appendChild(container);
 
-    // eventos
-    document.getElementById("oraculo-btn").onclick = () => {
-        const pop = document.getElementById("oraculo-pop");
+    // abrir/fechar
+    const btn = document.getElementById("oraculo-btn");
+    const pop = document.getElementById("oraculo-pop");
+
+    btn.onclick = (e) => {
+        // evita conflito com drag
+        if (btn.dragging) return;
         pop.style.display = pop.style.display === "none" ? "block" : "none";
     };
 
     document.getElementById("close-pop").onclick = () => {
-        document.getElementById("oraculo-pop").style.display = "none";
+        pop.style.display = "none";
     };
 
     document.getElementById("btn-sortear").onclick = () => {
@@ -73,4 +77,37 @@ setTimeout(() => {
             "✨ destino revelado ✨";
     };
 
-}, 2000);
+    // =========================
+    // DRAG (arrastar botão)
+    // =========================
+    let offsetX, offsetY;
+    let isDragging = false;
+
+    btn.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        btn.dragging = false;
+
+        offsetX = e.clientX - container.offsetLeft;
+        offsetY = e.clientY - container.offsetTop;
+
+        btn.style.cursor = "grabbing";
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+
+        btn.dragging = true;
+
+        container.style.left = (e.clientX - offsetX) + "px";
+        container.style.top = (e.clientY - offsetY) + "px";
+        container.style.transform = "none";
+    });
+
+    document.addEventListener("mouseup", () => {
+        isDragging = false;
+        btn.style.cursor = "grab";
+
+        setTimeout(() => btn.dragging = false, 50);
+    });
+
+}, 1000);
