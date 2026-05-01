@@ -7,7 +7,6 @@ setTimeout(() => {
     const container = document.createElement("div");
     container.id = "oraculo-container";
 
-    // posição inicial segura
     container.style.position = "fixed";
     container.style.left = "20px";
     container.style.top = "50%";
@@ -58,15 +57,16 @@ setTimeout(() => {
 
     document.body.appendChild(container);
 
-    // abrir/fechar
     const btn = document.getElementById("oraculo-btn");
     const pop = document.getElementById("oraculo-pop");
 
-    btn.onclick = (e) => {
-        // evita conflito com drag
+    // =========================
+    // CLICK
+    // =========================
+    btn.addEventListener("click", () => {
         if (btn.dragging) return;
         pop.style.display = pop.style.display === "none" ? "block" : "none";
-    };
+    });
 
     document.getElementById("close-pop").onclick = () => {
         pop.style.display = "none";
@@ -78,36 +78,57 @@ setTimeout(() => {
     };
 
     // =========================
-    // DRAG (arrastar botão)
+    // DRAG UNIVERSAL (TOUCH + MOUSE)
     // =========================
-    let offsetX, offsetY;
     let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
 
-    btn.addEventListener("mousedown", (e) => {
+    function startDrag(x, y) {
         isDragging = true;
         btn.dragging = false;
 
-        offsetX = e.clientX - container.offsetLeft;
-        offsetY = e.clientY - container.offsetTop;
+        offsetX = x - container.offsetLeft;
+        offsetY = y - container.offsetTop;
+    }
 
-        btn.style.cursor = "grabbing";
-    });
-
-    document.addEventListener("mousemove", (e) => {
+    function moveDrag(x, y) {
         if (!isDragging) return;
 
         btn.dragging = true;
 
-        container.style.left = (e.clientX - offsetX) + "px";
-        container.style.top = (e.clientY - offsetY) + "px";
+        container.style.left = (x - offsetX) + "px";
+        container.style.top = (y - offsetY) + "px";
         container.style.transform = "none";
-    });
+    }
 
-    document.addEventListener("mouseup", () => {
+    function endDrag() {
         isDragging = false;
-        btn.style.cursor = "grab";
-
         setTimeout(() => btn.dragging = false, 50);
+    }
+
+    // mouse
+    btn.addEventListener("mousedown", (e) => {
+        startDrag(e.clientX, e.clientY);
     });
+
+    document.addEventListener("mousemove", (e) => {
+        moveDrag(e.clientX, e.clientY);
+    });
+
+    document.addEventListener("mouseup", endDrag);
+
+    // touch (ESSENCIAL pro celular)
+    btn.addEventListener("touchstart", (e) => {
+        const t = e.touches[0];
+        startDrag(t.clientX, t.clientY);
+    });
+
+    document.addEventListener("touchmove", (e) => {
+        const t = e.touches[0];
+        moveDrag(t.clientX, t.clientY);
+    });
+
+    document.addEventListener("touchend", endDrag);
 
 }, 1000);
