@@ -1,6 +1,9 @@
-import { substituteParams } from '../../../../scripts/variables.js';
+// O SillyTavern precisa que a extensão seja exportada assim para o carregador oficial ler
+export { init };
 
-jQuery(async () => {
+function init() {
+    console.log("Oráculo Coquette: Iniciando...");
+    
     const oraculoHtml = `
         <div id="oraculo-container">
             <div id="oraculo-floating-btn" title="Abrir Oráculo">🎀</div>
@@ -11,40 +14,32 @@ jQuery(async () => {
                 </div>
                 <div id="oraculo-content">
                     <p style="font-family: 'Playfair Display'; font-size: 13px;">Toque na carta para ouvir o destino...</p>
-                    <div id="carta-exibida" style="margin: 10px 0; min-height: 50px; border: 1px dashed #b3b3b3; padding: 5px;"></div>
-                    <button id="tirar-carta" style="font-family: 'Ballet'; width: 100%; background: rgba(255,255,255,0.1); border: 1px solid #b3b3b3; color: white; cursor: pointer;">Tirar Carta</button>
+                    <div id="carta-exibida" style="margin: 10px 0; min-height: 50px; border: 1px dashed #b3b3b3; padding: 5px; color: #ffb6c1;"></div>
+                    <button id="tirar-carta" style="width: 100%; background: rgba(255,255,255,0.1); border: 1px solid #b3b3b3; color: white; cursor: pointer; padding: 5px;">Tirar Carta</button>
                 </div>
             </div>
         </div>
     `;
 
-    $('body').append(oraculoHtml);
+    if ($('#oraculo-container').length === 0) {
+        $('body').append(oraculoHtml);
+    }
 
-    $('#oraculo-floating-btn').on('click', () => {
-        $('#oraculo-popup').toggleClass('hidden');
-    });
+    $('#oraculo-floating-btn').on('click', () => $('#oraculo-popup').toggleClass('hidden'));
+    $('#close-oraculo').on('click', () => $('#oraculo-popup').addClass('hidden'));
 
-    $('#close-oraculo').on('click', () => {
-        $('#oraculo-popup').addClass('hidden');
-    });
-
-    $('#tirar-carta').on('click', () => {
-        // As mensagens agora usam a tag {{user}}
+    $('#tirar-carta').on('click', function() {
         const mensagens = [
             "O destino sorri para você, {{user}}.", 
-            "Cuidado com o que não foi dito, {{user}}...", 
-            "Uma surpresa romântica se aproxima de {{user}}.", 
-            "O silêncio esconde uma verdade para {{user}}."
+            "Cuidado com o que não foi dito...", 
+            "Uma surpresa romântica se aproxima.", 
+            "O silêncio esconde uma verdade."
         ];
-        
         const sorteio = mensagens[Math.floor(Math.random() * mensagens.length)];
         
-        // Aqui a mágica acontece: o ST troca {{user}} pelo seu nome real (Lexi, Gabi, etc)
-        const mensagemFinal = substituteParams(sorteio);
-        
-        $('#carta-exibida').text(mensagemFinal);
+        // O SillyTavern tem uma função global chamada substituteParams
+        // mas em extensões novas usamos o power do próprio parser do ST
+        const finalMsg = sorteio.replace('{{user}}', window.SillyTavern.getContext().name1 || "Gabi");
+        $('#carta-exibida').text(finalMsg);
     });
-
-    console.log("Oráculo Coquette carregado! 🎀");
-});
-
+}
