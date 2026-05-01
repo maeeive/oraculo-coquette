@@ -30,13 +30,12 @@ setTimeout(() => {
             🎀
         </div>
 
-        <!-- POPUP AGORA ABRE PRA ESQUERDA -->
+        <!-- POPUP GRUDADO À ESQUERDA -->
         <div id="oraculo-pop" style="
             display:none;
             position:absolute;
-            right:65px;
-            top:50%;
-            transform:translateY(-50%);
+            right:60px;   /* <-- lado esquerdo do botão */
+            top:0;        /* <-- alinhado com o botão */
             width:220px;
             background:#111;
             color:white;
@@ -78,7 +77,7 @@ setTimeout(() => {
     };
 
     // =========================
-    // DRAG (MOBILE + PC)
+    // DRAG (mobile + pc)
     // =========================
     let isDragging = false;
     let offsetX = 0;
