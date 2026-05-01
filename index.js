@@ -1,5 +1,3 @@
-alert("ORACULO: carregou");
-
 setTimeout(() => {
 
     if (document.getElementById("oraculo-container")) return;
@@ -30,12 +28,11 @@ setTimeout(() => {
             🎀
         </div>
 
-        <!-- POPUP GRUDADO À ESQUERDA -->
         <div id="oraculo-pop" style="
             display:none;
             position:absolute;
-            right:60px;   /* <-- lado esquerdo do botão */
-            top:0;        /* <-- alinhado com o botão */
+            left:65px;
+            top:0;
             width:220px;
             background:#111;
             color:white;
@@ -61,7 +58,9 @@ setTimeout(() => {
     const btn = document.getElementById("oraculo-btn");
     const pop = document.getElementById("oraculo-pop");
 
-    // clique abre popup
+    // =========================
+    // CLICK
+    // =========================
     btn.addEventListener("click", () => {
         if (btn.dragging) return;
         pop.style.display = pop.style.display === "none" ? "block" : "none";
@@ -77,7 +76,7 @@ setTimeout(() => {
     };
 
     // =========================
-    // DRAG (mobile + pc)
+    // DRAG UNIVERSAL (TOUCH + MOUSE)
     // =========================
     let isDragging = false;
     let offsetX = 0;
@@ -117,7 +116,7 @@ setTimeout(() => {
 
     document.addEventListener("mouseup", endDrag);
 
-    // touch
+    // touch (ESSENCIAL pro celular)
     btn.addEventListener("touchstart", (e) => {
         const t = e.touches[0];
         startDrag(t.clientX, t.clientY);
