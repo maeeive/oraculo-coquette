@@ -1,11 +1,13 @@
-import { eventSource, event_types } from "../../../../script.js";
+alert("ORACULO: index.js carregou");
 
-console.log("Oráculo carregando...");
+console.log("ORACULO: iniciando script");
 
-eventSource.on(event_types.APP_READY, () => {
-    console.log("ST pronto - iniciando oráculo");
+// força execução depois que tudo carregou
+setTimeout(() => {
+    console.log("ORACULO: tentando inserir botão");
 
-    if (document.getElementById('oraculo-container')) return;
+    // evita duplicação
+    if (document.getElementById("oraculo-container")) return;
 
     const container = document.createElement("div");
     container.id = "oraculo-container";
@@ -13,18 +15,22 @@ eventSource.on(event_types.APP_READY, () => {
     container.style.position = "fixed";
     container.style.right = "20px";
     container.style.bottom = "120px";
-    container.style.zIndex = "99999";
+    container.style.zIndex = "999999";
 
     container.innerHTML = `
         <div id="oraculo-btn" style="
-            width:50px;height:50px;
-            background:#ffb6c1;
+            width:50px;
+            height:50px;
+            background:pink;
             border-radius:50%;
             display:flex;
             align-items:center;
             justify-content:center;
             cursor:pointer;
-        ">🎀</div>
+            font-size:20px;
+        ">
+            🎀
+        </div>
 
         <div id="oraculo-pop" style="
             display:none;
@@ -37,13 +43,19 @@ eventSource.on(event_types.APP_READY, () => {
             border-radius:10px;
             width:200px;
         ">
-            <div id="carta-exibida">clique abaixo...</div>
-            <button id="btn-sortear">Sortear</button>
+            <div id="carta-exibida">
+                clique abaixo...
+            </div>
+
+            <button id="btn-sortear">
+                Revelar
+            </button>
         </div>
     `;
 
     document.body.appendChild(container);
 
+    // eventos
     document.getElementById("oraculo-btn").onclick = () => {
         const pop = document.getElementById("oraculo-pop");
         pop.style.display = pop.style.display === "none" ? "block" : "none";
@@ -54,5 +66,5 @@ eventSource.on(event_types.APP_READY, () => {
             "✨ destino revelado ✨";
     };
 
-    console.log("Oráculo funcionando 🎀");
-});
+    console.log("ORACULO: botão inserido com sucesso");
+}, 3000);
