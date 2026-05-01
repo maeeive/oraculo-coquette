@@ -1,0 +1,11 @@
+{
+    "name": "Oráculo Coquette",
+    "description": "Tiragem de cartas e conselhos com estética Rose-Tinted Dream.",
+    "version": "1.0.0",
+    "author": "Gabi",
+    "main": "index.js",
+    "style": "style.css",
+    "require": [],
+    "optional": []
+}
+
