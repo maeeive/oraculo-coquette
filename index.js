@@ -2,7 +2,6 @@ alert("ORACULO: index.js carregou");
 
 console.log("ORACULO: iniciando script");
 
-// força execução depois que tudo carregou
 setTimeout(() => {
     console.log("ORACULO: tentando inserir botão");
 
@@ -13,43 +12,38 @@ setTimeout(() => {
     container.id = "oraculo-container";
 
     container.style.position = "fixed";
-    container.style.right = "20px";
-    container.style.bottom = "120px";
-    container.style.zIndex = "999999";
+    container.style.top = "50%";
+    container.style.left = "50%";
+    container.style.transform = "translate(-50%, -50%)";
+    container.style.zIndex = "9999999";
+    container.style.background = "red";
+    container.style.padding = "20px";
 
     container.innerHTML = `
         <div id="oraculo-btn" style="
-            width:50px;
-            height:50px;
-            background:pink;
+            width:80px;
+            height:80px;
+            background:yellow;
             border-radius:50%;
             display:flex;
             align-items:center;
             justify-content:center;
             cursor:pointer;
-            font-size:20px;
+            font-size:30px;
         ">
             🎀
         </div>
 
         <div id="oraculo-pop" style="
             display:none;
-            position:absolute;
-            bottom:60px;
-            right:0;
+            margin-top:10px;
             background:#111;
             color:white;
             padding:10px;
             border-radius:10px;
-            width:200px;
         ">
-            <div id="carta-exibida">
-                clique abaixo...
-            </div>
-
-            <button id="btn-sortear">
-                Revelar
-            </button>
+            <div id="carta-exibida">clique abaixo...</div>
+            <button id="btn-sortear">Revelar</button>
         </div>
     `;
 
@@ -66,5 +60,5 @@ setTimeout(() => {
             "✨ destino revelado ✨";
     };
 
-    console.log("ORACULO: botão inserido com sucesso");
+    console.log("ORACULO: botão inserido");
 }, 3000);
