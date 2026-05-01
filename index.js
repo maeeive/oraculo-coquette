@@ -1,67 +1,60 @@
-alert("Coquette v3 💗");
+alert("Coquette FIX carregado 🎀");
 
 setTimeout(() => {
 
-    if (document.getElementById("coquette-style")) return;
+    function injectStyle() {
 
-    const style = document.createElement("style");
-    style.id = "coquette-style";
+        let old = document.getElementById("coquette-style");
+        if (old) old.remove();
 
-    style.innerHTML = `
+        const style = document.createElement("style");
+        style.id = "coquette-style";
 
-    /* 💗 glow geral nas mensagens */
-    .mes_block {
-        transition: all 0.3s ease;
+        style.innerHTML = `
+            .mes_block {
+                box-shadow: inset 0 0 40px rgba(255,182,193,0.25) !important;
+                border-radius: 15px !important;
+                transition: all 0.3s ease;
+            }
+
+            .mes_block:hover {
+                filter: brightness(1.05);
+            }
+
+            .mes_text {
+                text-shadow: 0 0 8px rgba(255,192,203,0.6) !important;
+            }
+
+            .mes .avatar img {
+                box-shadow: 0 0 20px rgba(255,182,193,0.7) !important;
+                filter: brightness(1.1);
+            }
+
+            #send_textarea {
+                box-shadow: 0 0 12px rgba(255,182,193,0.4) !important;
+            }
+        `;
+
+        document.head.appendChild(style);
     }
 
-    .mes_block:hover {
-        filter: brightness(1.05);
-    }
-
-    /* 🎀 camada aesthetic por cima */
-    .mes_block::after {
-        opacity: 0.7 !important;
-        filter: drop-shadow(0 0 10px rgba(255,182,193,0.6));
-    }
-
-    /* ✨ texto com brilho suave */
-    .mes_text {
-        text-shadow: 0 0 6px rgba(255,192,203,0.4) !important;
-    }
-
-    /* 💗 borda glow nas mensagens */
-    .mes_block::before {
-        box-shadow: inset 0 0 30px rgba(255,182,193,0.25);
-        border-radius: 15px;
-    }
-
-    /* 🩰 avatar mais dreamy */
-    .mes .avatar img {
-        filter: grayscale(0.3) brightness(1.1);
-        box-shadow: 0 0 15px rgba(255,182,193,0.6);
-    }
-
-    /* ✨ input aesthetic */
-    #send_textarea {
-        box-shadow: 0 0 10px rgba(255,182,193,0.3);
-    }
-
-    /* 🎀 leve glow geral */
-    body {
-        animation: dreamyGlow 4s ease-in-out infinite alternate;
-    }
-
-    @keyframes dreamyGlow {
-        from { filter: brightness(1); }
-        to { filter: brightness(1.05); }
-    }
-
-    `;
-
-    document.head.appendChild(style);
+    // roda uma vez
+    injectStyle();
 
     // =========================
-    // 🩰 partículas (mantidas)
+    // OBSERVA O CHAT (ESSENCIAL)
+    // =========================
+    const observer = new MutationObserver(() => {
+        injectStyle();
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+    // =========================
+    // sparkle (mantido)
     // =========================
     function sparkle() {
         const s = document.createElement("div");
