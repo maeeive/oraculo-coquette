@@ -1,92 +1,114 @@
-alert("Dreamy Injector carregou ✨");
+alert("Dreamy Aesthetic carregado ✨");
 
 setTimeout(() => {
 
     // evita duplicar
-    if (document.getElementById("dreamy-overlay")) return;
+    if (document.getElementById("dreamy-curtain")) return;
 
     // =========================
-    // PEGA ROOT DO ST
+    // 🎀 CORTINA ROSA (INTRO)
     // =========================
-    const app = document.querySelector("#app") || document.body;
+    const curtain = document.createElement("div");
+    curtain.id = "dreamy-curtain";
+
+    curtain.style.position = "fixed";
+    curtain.style.top = "0";
+    curtain.style.left = "0";
+    curtain.style.width = "100%";
+    curtain.style.height = "100%";
+    curtain.style.background = "linear-gradient(180deg, #ffb6c1, #ffd6e0)";
+    curtain.style.zIndex = "99999999";
+    curtain.style.transition = "transform 1.2s ease";
+    curtain.style.transform = "translateY(0%)";
+
+    document.body.appendChild(curtain);
+
+    // animação de abrir
+    setTimeout(() => {
+        curtain.style.transform = "translateY(-100%)";
+    }, 300);
+
+    setTimeout(() => {
+        curtain.remove();
+    }, 1500);
 
     // =========================
-    // OVERLAY ROSA (VINHETA)
+    // 💗 BORDA ROSA GLOW
     // =========================
-    const overlay = document.createElement("div");
-    overlay.id = "dreamy-overlay";
+    const border = document.createElement("div");
+    border.id = "dreamy-border";
 
-    overlay.style.position = "fixed";
-    overlay.style.top = "0";
-    overlay.style.left = "0";
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.pointerEvents = "none";
-    overlay.style.zIndex = "999999";
+    border.style.position = "fixed";
+    border.style.top = "0";
+    border.style.left = "0";
+    border.style.width = "100%";
+    border.style.height = "100%";
+    border.style.pointerEvents = "none";
+    border.style.zIndex = "999999";
 
-    document.body.appendChild(overlay);
-
-    // =========================
-    // UI
-    // =========================
-    const ui = document.createElement("div");
-    ui.id = "dreamy-ui";
-
-    ui.style.position = "fixed";
-    ui.style.left = "20px";
-    ui.style.bottom = "160px";
-    ui.style.zIndex = "9999999";
-    ui.style.background = "rgba(20,20,20,0.9)";
-    ui.style.padding = "12px";
-    ui.style.borderRadius = "12px";
-    ui.style.color = "white";
-    ui.style.width = "200px";
-    ui.style.fontSize = "12px";
-
-    ui.innerHTML = `
-        <div style="margin-bottom:8px;">🩰 Dreamy Mode</div>
-
-        <input id="dreamy-slider" type="range" min="0" max="100" value="30" style="width:100%;">
-
-        <div style="margin-top:6px;font-size:10px;">
-            intensidade de fofura ✨
-        </div>
+    border.style.boxShadow = `
+        inset 0 0 60px rgba(255,182,193,0.4),
+        inset 0 0 120px rgba(255,182,193,0.2)
     `;
 
-    document.body.appendChild(ui);
+    document.body.appendChild(border);
 
     // =========================
-    // EFEITOS
+    // ✨ GLOW NAS MENSAGENS
     // =========================
-    function applyEffects(intensity) {
+    const style = document.createElement("style");
 
-        // vinheta rosa
-        overlay.style.background = `
-            radial-gradient(circle, 
-            rgba(255,182,193,0) 50%, 
-            rgba(255,182,193,${intensity / 250}) 100%)
-        `;
+    style.innerHTML = `
+        .mes, .message {
+            transition: all 0.3s ease;
+        }
 
-        // brilho geral (FORÇA no app inteiro)
-        app.style.filter = `
-            brightness(${1 + intensity / 300})
-            saturate(${1 + intensity / 200})
-        `;
+        .mes:hover, .message:hover {
+            box-shadow: 0 0 15px rgba(255,182,193,0.5);
+            border-radius: 10px;
+        }
 
-        // glow global leve
-        app.style.textShadow = `
-            0 0 ${intensity / 6}px rgba(255,192,203,0.6)
-        `;
+        .mes p, .message p {
+            text-shadow: 0 0 6px rgba(255,192,203,0.5);
+        }
+    `;
+
+    document.head.appendChild(style);
+
+    // =========================
+    // 🩰 PARTICULAS LEVES (sparkle)
+    // =========================
+    function createSparkle() {
+        const sparkle = document.createElement("div");
+
+        sparkle.style.position = "fixed";
+        sparkle.style.width = "6px";
+        sparkle.style.height = "6px";
+        sparkle.style.background = "pink";
+        sparkle.style.borderRadius = "50%";
+        sparkle.style.left = Math.random() * window.innerWidth + "px";
+        sparkle.style.top = window.innerHeight + "px";
+        sparkle.style.opacity = "0.6";
+        sparkle.style.zIndex = "999998";
+        sparkle.style.pointerEvents = "none";
+
+        document.body.appendChild(sparkle);
+
+        let y = window.innerHeight;
+
+        const interval = setInterval(() => {
+            y -= 2;
+            sparkle.style.top = y + "px";
+            sparkle.style.opacity -= 0.01;
+
+            if (y < -10 || sparkle.style.opacity <= 0) {
+                clearInterval(interval);
+                sparkle.remove();
+            }
+        }, 16);
     }
 
-    // slider
-    const slider = document.getElementById("dreamy-slider");
+    // cria partículas de tempos em tempos
+    setInterval(createSparkle, 800);
 
-    slider.addEventListener("input", () => {
-        applyEffects(slider.value);
-    });
-
-    // inicial
-    applyEffects(30);
-
-}, 1000);
+}, 500);
