@@ -47,7 +47,7 @@ setTimeout(() => {
 
     #coquette-header {
         position: fixed;
-        top: 250px; /* abaixo do top bar */
+        top: 160px; /* abaixo do top bar */
         left: 50%;
         transform: translateX(-50%);
         z-index: 9999;
