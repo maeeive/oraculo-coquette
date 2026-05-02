@@ -1,85 +1,91 @@
 setTimeout(() => {
 
-    if (document.getElementById("lace-frame")) return;
+    if (document.getElementById("coquette-frame")) return;
 
+    // =========================
+    // 💗 CONTAINER
+    // =========================
     const frame = document.createElement("div");
-    frame.id = "lace-frame";
+    frame.id = "coquette-frame";
     document.body.appendChild(frame);
 
+    // =========================
+    // 🎀 BORDAS (4 lados)
+    // =========================
+    const sides = ["top","bottom","left","right"];
+
+    sides.forEach(side => {
+        const div = document.createElement("div");
+        div.className = "coquette-side coquette-" + side;
+        frame.appendChild(div);
+    });
+
+    // =========================
+    // 🎀 LACINHOS (cantos)
+    // =========================
+    const corners = ["tl","tr","bl","br"];
+
+    corners.forEach(c => {
+        const bow = document.createElement("div");
+        bow.className = "coquette-bow " + c;
+        bow.innerText = "🎀";
+        frame.appendChild(bow);
+    });
+
+    // =========================
+    // 💄 STYLE
+    // =========================
     const style = document.createElement("style");
 
     style.innerHTML = `
 
-    #lace-frame {
+    #coquette-frame {
         position: fixed;
         inset: 0;
         pointer-events: none;
         z-index: 9990; /* abaixo do header */
     }
 
-    /* 💗 TOP */
-    .lace-top {
+    .coquette-side {
         position: absolute;
-        top: 0;
-        left: 0;
+        background: rgba(255,182,193,0.9);
+        box-shadow: 0 0 20px rgba(255,182,193,0.6);
+    }
+
+    .coquette-top,
+    .coquette-bottom {
+        height: 12px;
         width: 100%;
-        height: 40px;
-        background: url("https://i.imgur.com/0XKzn2S.png") repeat-x;
-        background-size: contain;
-    }
-
-    /* 💗 BOTTOM */
-    .lace-bottom {
-        position: absolute;
-        bottom: 0;
         left: 0;
-        width: 100%;
-        height: 40px;
-        background: url("https://i.imgur.com/0XKzn2S.png") repeat-x;
-        background-size: contain;
-        transform: rotate(180deg);
     }
 
-    /* 💗 LEFT */
-    .lace-left {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 40px;
+    .coquette-top { top: 0; }
+    .coquette-bottom { bottom: 0; }
+
+    .coquette-left,
+    .coquette-right {
+        width: 12px;
         height: 100%;
-        background: url("https://i.imgur.com/0XKzn2S.png") repeat-y;
-        background-size: contain;
-        transform: rotate(90deg);
-    }
-
-    /* 💗 RIGHT */
-    .lace-right {
-        position: absolute;
         top: 0;
-        right: 0;
-        width: 40px;
-        height: 100%;
-        background: url("https://i.imgur.com/0XKzn2S.png") repeat-y;
-        background-size: contain;
-        transform: rotate(-90deg);
     }
 
-    /* ✨ glow suave */
-    #lace-frame {
-        box-shadow: inset 0 0 60px rgba(255,182,193,0.25);
+    .coquette-left { left: 0; }
+    .coquette-right { right: 0; }
+
+    /* 🎀 bows */
+    .coquette-bow {
+        position: absolute;
+        font-size: 20px;
+        text-shadow: 0 0 10px pink;
     }
+
+    .tl { top: 5px; left: 5px; }
+    .tr { top: 5px; right: 5px; }
+    .bl { bottom: 5px; left: 5px; }
+    .br { bottom: 5px; right: 5px; }
 
     `;
 
     document.head.appendChild(style);
-
-    // =========================
-    // 🎀 ADD ELEMENTS
-    // =========================
-    ["top","bottom","left","right"].forEach(pos => {
-        const div = document.createElement("div");
-        div.className = "lace-" + pos;
-        frame.appendChild(div);
-    });
 
 }, 500);
