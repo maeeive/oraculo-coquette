@@ -81,10 +81,8 @@ jQuery(async () => {
 
     console.log("Coquette Frame iniciando 🎀");
 
-    // evita duplicar
     if (document.getElementById("coquette-frame")) return;
 
-    // delay pra garantir que o ST carregou
     await new Promise(r => setTimeout(r, 1000));
 
     // =========================
@@ -94,14 +92,16 @@ jQuery(async () => {
     frame.id = "coquette-frame";
 
     frame.style.position = "fixed";
-    frame.style.inset = "6px"; // 🔥 evita overflow no mobile
+    frame.style.inset = "6px"; // mantém dentro da tela
     frame.style.pointerEvents = "none";
     frame.style.zIndex = "9995";
 
-    frame.style.boxShadow = `
-        inset 0 0 0 5px rgba(255,182,193,0.8),
-        inset 0 0 30px rgba(255,182,193,0.3)
-    `;
+    // 🔥 borda REAL (não buga)
+    frame.style.border = "5px solid rgba(255,182,193,0.9)";
+    frame.style.borderRadius = "18px";
+
+    // glow leve separado (não depende da borda)
+    frame.style.boxShadow = "0 0 20px rgba(255,182,193,0.3)";
 
     document.body.appendChild(frame);
 
