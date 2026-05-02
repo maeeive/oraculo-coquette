@@ -3,38 +3,92 @@ setTimeout(() => {
     if (document.getElementById("coquette-frame")) return;
 
     // =========================
-    // 🎀 CONTAINER DA MOLDURA
+    // 💗 CONTAINER
     // =========================
     const frame = document.createElement("div");
     frame.id = "coquette-frame";
     document.body.appendChild(frame);
 
     // =========================
+    // 🎀 BORDAS (4 lados)
+    // =========================
+    const sides = ["top","bottom","left","right"];
+
+    sides.forEach(side => {
+        const div = document.createElement("div");
+        div.className = "coquette-side coquette-" + side;
+        frame.appendChild(div);
+    });
+
+    // =========================
+    // 🎀 LACINHOS (cantos)
+    // =========================
+    const corners = ["tl","tr","bl","br"];
+
+    corners.forEach(c => {
+        const bow = document.createElement("div");
+        bow.className = "coquette-bow " + c;
+        bow.innerText = "🎀";
+        frame.appendChild(bow);
+    });
+
+    // =========================
     // 💄 STYLE
     // =========================
     const style = document.createElement("style");
-    style.id = "coquette-frame-style";
 
     style.innerHTML = `
 
-    /* 🎀 BASE DA MOLDURA */
     #coquette-frame {
         position: fixed;
         inset: 0;
         pointer-events: none;
-        z-index: 9998;
+        z-index: 9990; /* abaixo do header */
     }
 
-    /* 💗 BORDA PRINCIPAL */
-    #coquette-frame::before {
-        content: "";
+    .coquette-side {
         position: absolute;
-        inset: 0;
-        border: 14px solid rgba(255, 182, 193, 0.9); /* rosa bebê */
-        border-radius: 25px;
-        box-shadow:
-            0 0 40px rgba(255,182,193,0.6),
-            inset 0 0 30px rgba(255,182,193,0.4);
+        background: rgba(255,182,193,0.9);
+        box-shadow: 0 0 20px rgba(255,182,193,0.6);
+    }
+
+    .coquette-top,
+    .coquette-bottom {
+        height: 12px;
+        width: 100%;
+        left: 0;
+    }
+
+    .coquette-top { top: 0; }
+    .coquette-bottom { bottom: 0; }
+
+    .coquette-left,
+    .coquette-right {
+        width: 12px;
+        height: 100%;
+        top: 0;
+    }
+
+    .coquette-left { left: 0; }
+    .coquette-right { right: 0; }
+
+    /* 🎀 bows */
+    .coquette-bow {
+        position: absolute;
+        font-size: 20px;
+        text-shadow: 0 0 10px pink;
+    }
+
+    .tl { top: 5px; left: 5px; }
+    .tr { top: 5px; right: 5px; }
+    .bl { bottom: 5px; left: 5px; }
+    .br { bottom: 5px; right: 5px; }
+
+    `;
+
+    document.head.appendChild(style);
+
+}, 500);            inset 0 0 30px rgba(255,182,193,0.4);
     }
 
     /* 🎀 LACINHOS (cantos) */
