@@ -84,7 +84,7 @@ jQuery(async () => {
     // evita duplicar
     if (document.getElementById("coquette-frame")) return;
 
-    // pequeno delay igual ao seu header
+    // delay pra garantir que o ST carregou
     await new Promise(r => setTimeout(r, 1000));
 
     // =========================
@@ -94,19 +94,19 @@ jQuery(async () => {
     frame.id = "coquette-frame";
 
     frame.style.position = "fixed";
-frame.style.inset = "6px"; // 🔥 resolve o overflow
-frame.style.pointerEvents = "none";
-frame.style.zIndex = "9995";
+    frame.style.inset = "6px"; // 🔥 evita overflow no mobile
+    frame.style.pointerEvents = "none";
+    frame.style.zIndex = "9995";
 
-frame.style.boxShadow = `
-    inset 0 0 0 5px rgba(255,182,193,0.8),
-    inset 0 0 30px rgba(255,182,193,0.3)
-`;
+    frame.style.boxShadow = `
+        inset 0 0 0 5px rgba(255,182,193,0.8),
+        inset 0 0 30px rgba(255,182,193,0.3)
+    `;
 
     document.body.appendChild(frame);
 
     // =========================
-    // 🎀 BOWS
+    // 🎀 LACINHOS
     // =========================
     const corners = [
         ["top","left"],
