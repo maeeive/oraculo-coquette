@@ -79,7 +79,7 @@ setTimeout(() => {
 
 jQuery(async () => {
 
-    console.log("Coquette Frame refinado 💗");
+    console.log("Coquette Frame estrelas ✨");
 
     try {
 
@@ -101,7 +101,7 @@ jQuery(async () => {
         container.style.pointerEvents = "none";
         container.style.zIndex = "9995";
 
-        // 💗 BORDA MAIS FINA
+        // 💗 BORDA
         container.style.boxShadow = `
             inset 0 0 0 4px rgba(255,182,193,0.7),
             inset 0 0 25px rgba(255,182,193,0.3)
@@ -116,22 +116,22 @@ jQuery(async () => {
 
         style.innerHTML = `
         @keyframes sparkleLeft {
-            0% { transform: translateX(0); opacity: 0.8; }
+            0% { transform: translateX(0); opacity: 0.7; }
             100% { transform: translateX(70px); opacity: 0; }
         }
 
         @keyframes sparkleRight {
-            0% { transform: translateX(0); opacity: 0.8; }
+            0% { transform: translateX(0); opacity: 0.7; }
             100% { transform: translateX(-70px); opacity: 0; }
         }
 
         @keyframes sparkleTop {
-            0% { transform: translateY(0); opacity: 0.8; }
+            0% { transform: translateY(0); opacity: 0.7; }
             100% { transform: translateY(70px); opacity: 0; }
         }
 
         @keyframes sparkleBottom {
-            0% { transform: translateY(0); opacity: 0.8; }
+            0% { transform: translateY(0); opacity: 0.7; }
             100% { transform: translateY(-70px); opacity: 0; }
         }
         `;
@@ -145,13 +145,13 @@ jQuery(async () => {
 
             const s = document.createElement("div");
 
-            // 💗 coração mais visível
-            s.innerText = "♡";
+            // ✨ estrela delicada
+            s.innerText = "✦";
             s.style.position = "absolute";
-            s.style.fontSize = "10px";
-            s.style.color = "rgba(255,255,255,0.9)";
-            s.style.opacity = "0.85";
-            s.style.textShadow = "0 0 10px rgba(255,255,255,1)";
+            s.style.fontSize = "9px"; // menor
+            s.style.color = "rgba(255,255,255,0.85)";
+            s.style.opacity = "0.75";
+            s.style.textShadow = "0 0 8px rgba(255,255,255,0.9)";
             s.style.pointerEvents = "none";
 
             const type = Math.floor(Math.random() * 4);
@@ -193,7 +193,7 @@ jQuery(async () => {
         // =========================
         setInterval(spawn, 140);
 
-        console.log("Coquette Frame refinado ✨");
+        console.log("Coquette Frame estrelas pronto ✨");
 
     } catch (e) {
         console.error("Erro:", e);
