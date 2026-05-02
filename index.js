@@ -77,63 +77,84 @@ setTimeout(() => {
 
 }, 500);
 
-/* 1. CONTAINER PRINCIPAL (Garanta que ele tenha position: relative) */
-body {
-    position: relative !important;
-    overflow-x: hidden !important; /* Evita rolagem horizontal indesejada */
-}
+setTimeout(() => {
 
-/* 2. A Borda Grossa com Frufrus (Usando o ::before do body) */
-body::before {
-    content: "";
-    position: fixed; /* Fixa na tela para não subir com o chat */
-    top: 10px; /* Margem do topo */
-    left: 10px; /* Margem da esquerda */
-    right: 10px; /* Margem da direita */
-    bottom: 10px; /* Margem do fundo */
-    z-index: 9998; /* Fica abaixo do cabeçalho JS, mas acima de todo o resto */
-    pointer-events: none; /* Garante que você consiga clicar no chat através dela */
-    
-    /* 🎀 Borda Rosa Bebê Grossa com Textura 'Frufru' (Usando SVG/Gradiente para o efeito) */
-    border: 15px solid transparent; /* Espessura da borda */
-    border-image-source: linear-gradient(to right, #ffb6c1 0%, rgba(255,182,193,0.3) 10%, #ffb6c1 20%, rgba(255,182,193,0.3) 30%, #ffb6c1 40%, rgba(255,182,193,0.3) 50%, #ffb6c1 60%, rgba(255,182,193,0.3) 70%, #ffb6c1 80%, rgba(255,182,193,0.3) 90%, #ffb6c1 100%);
-    border-image-slice: 15; /* Corta o gradiente para criar o efeito ondulado */
-    border-image-repeat: repeat; /* Repete o efeito */
-    border-radius: 40px !important; /* Bordas arredondadas suaves */
+    if (document.getElementById("coquette-frame")) return;
 
-    /* 💄 Sombreamento Rosa Intenso */
-    box-shadow: 0 0 25px rgba(212, 76, 140, 0.7), inset 0 0 15px rgba(212, 76, 140, 0.5) !important;
-}
+    // =========================
+    // 🎀 CONTAINER DA MOLDURA
+    // =========================
+    const frame = document.createElement("div");
+    frame.id = "coquette-frame";
+    document.body.appendChild(frame);
 
-/* 3. Os Lacinhos de Decoração (Usando o ::after do body) */
-body::after {
-    content: "🎀"; /* Lacinho da esquerda inferior */
-    position: fixed;
-    bottom: 30px; /* Alinhado com a borda de frufru */
-    left: 20px; /* Alinhado com a borda de frufru */
-    font-size: 35px; /* Tamanho do lacinho */
-    z-index: 10000; /* Fica por cima de tudo */
-    pointer-events: none;
-    text-shadow: 0 0 10px rgba(212, 76, 140, 0.9) !important;
-}
+    // =========================
+    // 💄 STYLE
+    // =========================
+    const style = document.createElement("style");
+    style.id = "coquette-frame-style";
 
-/* Adicionando o lacinho da direita inferior */
-body::after:has(+ * + body::after) {
-    display: none; /* Evita duplicar se houver recarregamento */
-}
+    style.innerHTML = `
 
-/* Duplicando o lacinho para a direita inferior */
-#chat {
-    position: relative;
-}
+    /* 🎀 BASE DA MOLDURA */
+    #coquette-frame {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9998;
+    }
 
-#chat::before {
-    content: "🎀";
-    position: fixed;
-    bottom: 30px;
-    right: 20px;
-    font-size: 35px;
-    z-index: 10000;
-    pointer-events: none;
-    text-shadow: 0 0 10px rgba(212, 76, 140, 0.9) !important;
-        }
+    /* 💗 BORDA PRINCIPAL */
+    #coquette-frame::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 14px solid rgba(255, 182, 193, 0.9); /* rosa bebê */
+        border-radius: 25px;
+        box-shadow:
+            0 0 40px rgba(255,182,193,0.6),
+            inset 0 0 30px rgba(255,182,193,0.4);
+    }
+
+    /* 🎀 LACINHOS (cantos) */
+    #coquette-frame::after {
+        content: "🎀 🎀 🎀 🎀";
+        position: absolute;
+        width: 100%;
+        top: 10px;
+        left: 0;
+        text-align: center;
+        font-size: 22px;
+        opacity: 0.9;
+        text-shadow: 0 0 10px rgba(255,182,193,0.8);
+    }
+
+    /* 🎀 LACINHOS LATERAIS */
+    body::before {
+        content: "🎀";
+        position: fixed;
+        left: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 22px;
+        z-index: 9999;
+        pointer-events: none;
+        text-shadow: 0 0 10px pink;
+    }
+
+    body::after {
+        content: "🎀";
+        position: fixed;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 22px;
+        z-index: 9999;
+        pointer-events: none;
+        text-shadow: 0 0 10px pink;
+    }
+
+    /* 💗 SOMBRA INTERNA (efeito vignette soft) */
+    #coquette-frame {
+        box-shadow: inset 0 0 80px rgba(255,182,193,0.25);
+    }
