@@ -97,7 +97,7 @@ jQuery(async () => {
     frame.style.zIndex = "9995";
 
     frame.style.boxShadow = `
-        inset 0 0 0 6px rgba(255,182,193,0.8),
+        inset 0 0 0 4px rgba(255,182,193,0.8),
         inset 0 0 40px rgba(255,182,193,0.4)
     `;
 
