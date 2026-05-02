@@ -94,17 +94,14 @@ jQuery(async () => {
     frame.id = "coquette-frame";
 
     frame.style.position = "fixed";
-    frame.style.top = "0";
-    frame.style.left = "0";
-    frame.style.width = "100vw";
-    frame.style.height = "100vh";
-    frame.style.pointerEvents = "none";
-    frame.style.zIndex = "9995";
+frame.style.inset = "6px"; // 🔥 resolve o overflow
+frame.style.pointerEvents = "none";
+frame.style.zIndex = "9995";
 
-    frame.style.boxShadow = `
-        inset 0 0 0 6px rgba(255,182,193,0.8),
-        inset 0 0 40px rgba(255,182,193,0.4)
-    `;
+frame.style.boxShadow = `
+    inset 0 0 0 5px rgba(255,182,193,0.8),
+    inset 0 0 30px rgba(255,182,193,0.3)
+`;
 
     document.body.appendChild(frame);
 
