@@ -79,7 +79,7 @@ setTimeout(() => {
 
 jQuery(async () => {
 
-    console.log("Coquette Frame estrelas ✨");
+    console.log("Coquette Frame estrelas fluxo 💗");
 
     try {
 
@@ -101,7 +101,6 @@ jQuery(async () => {
         container.style.pointerEvents = "none";
         container.style.zIndex = "9995";
 
-        // 💗 BORDA
         container.style.boxShadow = `
             inset 0 0 0 4px rgba(255,182,193,0.7),
             inset 0 0 25px rgba(255,182,193,0.3)
@@ -110,29 +109,29 @@ jQuery(async () => {
         document.body.appendChild(container);
 
         // =========================
-        // ✨ STYLE
+        // ✨ STYLE (movimento MAIS LONGO)
         // =========================
         const style = document.createElement("style");
 
         style.innerHTML = `
         @keyframes sparkleLeft {
-            0% { transform: translateX(0); opacity: 0.7; }
-            100% { transform: translateX(70px); opacity: 0; }
+            0% { transform: translateX(0); opacity: 0.8; }
+            100% { transform: translateX(140px); opacity: 0; }
         }
 
         @keyframes sparkleRight {
-            0% { transform: translateX(0); opacity: 0.7; }
-            100% { transform: translateX(-70px); opacity: 0; }
+            0% { transform: translateX(0); opacity: 0.8; }
+            100% { transform: translateX(-140px); opacity: 0; }
         }
 
         @keyframes sparkleTop {
-            0% { transform: translateY(0); opacity: 0.7; }
-            100% { transform: translateY(70px); opacity: 0; }
+            0% { transform: translateY(0); opacity: 0.8; }
+            100% { transform: translateY(140px); opacity: 0; }
         }
 
         @keyframes sparkleBottom {
-            0% { transform: translateY(0); opacity: 0.7; }
-            100% { transform: translateY(-70px); opacity: 0; }
+            0% { transform: translateY(0); opacity: 0.8; }
+            100% { transform: translateY(-140px); opacity: 0; }
         }
         `;
 
@@ -145,40 +144,39 @@ jQuery(async () => {
 
             const s = document.createElement("div");
 
-            // ✨ estrela delicada
             s.innerText = "✦";
             s.style.position = "absolute";
-            s.style.fontSize = "9px"; // menor
-            s.style.color = "rgba(255,255,255,0.85)";
-            s.style.opacity = "0.75";
-            s.style.textShadow = "0 0 8px rgba(255,255,255,0.9)";
+            s.style.fontSize = "9px";
+            s.style.color = "rgba(255,255,255,0.9)";
+            s.style.opacity = "0.85";
+            s.style.textShadow = "0 0 10px rgba(255,255,255,1)";
             s.style.pointerEvents = "none";
 
             const type = Math.floor(Math.random() * 4);
-            const duration = (Math.random() * 2 + 2).toFixed(2);
+            const duration = (Math.random() * 2 + 2.5).toFixed(2);
 
             if (type === 0) {
                 s.style.left = "0px";
                 s.style.top = Math.random() * 100 + "%";
-                s.style.animation = "sparkleLeft " + duration + "s linear infinite";
+                s.style.animation = "sparkleLeft " + duration + "s ease-out infinite";
             }
 
             if (type === 1) {
                 s.style.right = "0px";
                 s.style.top = Math.random() * 100 + "%";
-                s.style.animation = "sparkleRight " + duration + "s linear infinite";
+                s.style.animation = "sparkleRight " + duration + "s ease-out infinite";
             }
 
             if (type === 2) {
                 s.style.top = "0px";
                 s.style.left = Math.random() * 100 + "%";
-                s.style.animation = "sparkleTop " + duration + "s linear infinite";
+                s.style.animation = "sparkleTop " + duration + "s ease-out infinite";
             }
 
             if (type === 3) {
                 s.style.bottom = "0px";
                 s.style.left = Math.random() * 100 + "%";
-                s.style.animation = "sparkleBottom " + duration + "s linear infinite";
+                s.style.animation = "sparkleBottom " + duration + "s ease-out infinite";
             }
 
             s.style.animationDelay = (Math.random() * 2) + "s";
@@ -188,12 +186,9 @@ jQuery(async () => {
             setTimeout(() => s.remove(), duration * 1000);
         }
 
-        // =========================
-        // ⏱ LOOP
-        // =========================
         setInterval(spawn, 140);
 
-        console.log("Coquette Frame estrelas pronto ✨");
+        console.log("✨ fluxo ativado");
 
     } catch (e) {
         console.error("Erro:", e);
