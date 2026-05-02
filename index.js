@@ -107,7 +107,7 @@ jQuery(async () => {
     document.body.appendChild(frame);
 
     // =========================
-    // ✨ SPARKLES
+    // ✨ SPARKLES CONTAINER
     // =========================
     const sparkleContainer = document.createElement("div");
     sparkleContainer.id = "coquette-sparkles";
@@ -122,21 +122,23 @@ jQuery(async () => {
 
     document.body.appendChild(sparkleContainer);
 
+    // =========================
+    // 💄 STYLE
+    // =========================
     const style = document.createElement("style");
 
     style.innerHTML = `
     .sparkle {
         position: absolute;
-        width: 4px;
-        height: 4px;
+        width: 3px;
+        height: 3px;
         background: white;
         border-radius: 50%;
         opacity: 0.2;
         filter: blur(1px);
-        animation: sparkleMove linear infinite;
     }
 
-    @keyframes sparkleMove {
+    @keyframes sparkleLeft {
         from {
             transform: translateX(0);
             opacity: 0;
@@ -149,18 +151,53 @@ jQuery(async () => {
             opacity: 0;
         }
     }
+
+    @keyframes sparkleRight {
+        from {
+            transform: translateX(0);
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.25;
+        }
+        to {
+            transform: translateX(-60px);
+            opacity: 0;
+        }
+    }
     `;
 
     document.head.appendChild(style);
 
-    // cria várias estrelinhas
-    for (let i = 0; i < 25; i++) {
+    // =========================
+    // ✨ GERAR SPARKLES
+    // =========================
+    for (let i = 0; i < 30; i++) {
         const s = document.createElement("div");
         s.className = "sparkle";
 
-        // lado esquerdo OU direito
-        const side = Math.random() > 0.5 ? "left" : "right";
+        const isLeft = Math.random() > 0.5;
 
+        // só perto das bordas (mais aesthetic)
+        const vertical = Math.random() * 100;
+        s.style.top = vertical + "%";
+
+        if (isLeft) {
+            s.style.left = "0px";
+            s.style.animation = `sparkleLeft ${2 + Math.random() * 3}s linear infinite`;
+        } else {
+            s.style.right = "0px";
+            s.style.animation = `sparkleRight ${2 + Math.random() * 3}s linear infinite`;
+        }
+
+        s.style.animationDelay = (Math.random() * 3) + "s";
+
+        sparkleContainer.appendChild(s);
+    }
+
+    console.log("Coquette Frame + Sparkles ✨ carregado");
+
+});
         s.style.top = Math.random() * 100 + "%";
         s.style[side] = "0px";
 
