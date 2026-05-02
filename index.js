@@ -1,5 +1,3 @@
-alert("Floating Coquette Header 🎀");
-
 setTimeout(() => {
 
     if (document.getElementById("coquette-header")) return;
@@ -60,8 +58,8 @@ setTimeout(() => {
         font-size: 34px;
         color: #FFB2C4;
         text-shadow:
-            0 0 6px rgba(212, 76, 140, 0.8),
-            0 0 6px rgba(212, 76, 140, 0.8);
+            0 0 10px rgba(255, 255, 255, 0.9),
+            0 0 5px rgba(255, 255, 255, 0.6);
     }
 
     #coquette-sub {
@@ -70,8 +68,7 @@ setTimeout(() => {
         color: #FFB2C4;
         opacity: 0.9;
         letter-spacing: 2px;
-        text-shadow: 0 0 6px rgba(212, 76, 140, 0.8),
-        0 0 6px rgba(212, 76, 140, 0.8);
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
         margin-top: -5px;
     }
     `;
