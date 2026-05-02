@@ -79,14 +79,14 @@ setTimeout(() => {
 
 jQuery(async () => {
 
-    console.log("Coquette Frame V2 🎀");
+    console.log("Coquette Frame iniciando ✨");
 
     if (document.getElementById("coquette-frame")) return;
 
     await new Promise(r => setTimeout(r, 1000));
 
     // =========================
-    // 💗 FRAME BASE
+    // 💗 FRAME
     // =========================
     const frame = document.createElement("div");
     frame.id = "coquette-frame";
@@ -99,7 +99,6 @@ jQuery(async () => {
     frame.style.pointerEvents = "none";
     frame.style.zIndex = "9995";
 
-    // 💗 borda + glow
     frame.style.boxShadow = `
         inset 0 0 0 5px rgba(255,182,193,0.9),
         inset 0 0 30px rgba(255,182,193,0.25)
@@ -108,57 +107,69 @@ jQuery(async () => {
     document.body.appendChild(frame);
 
     // =========================
-    // 🧵 ESTAMPA NA BORDA
+    // ✨ SPARKLES
     // =========================
-    const pattern = document.createElement("div");
+    const sparkleContainer = document.createElement("div");
+    sparkleContainer.id = "coquette-sparkles";
 
-    pattern.style.position = "fixed";
-    pattern.style.top = "0";
-    pattern.style.left = "0";
-    pattern.style.width = "100vw";
-    pattern.style.height = "calc(100vh - 10px)";
-    pattern.style.pointerEvents = "none";
-    pattern.style.zIndex = "9994";
+    sparkleContainer.style.position = "fixed";
+    sparkleContainer.style.top = "0";
+    sparkleContainer.style.left = "0";
+    sparkleContainer.style.width = "100vw";
+    sparkleContainer.style.height = "100vh";
+    sparkleContainer.style.pointerEvents = "none";
+    sparkleContainer.style.zIndex = "9996";
 
-    pattern.style.backgroundImage = "radial-gradient(rgba(255,182,193,0.15) 1px, transparent 1px)";
-    pattern.style.backgroundSize = "12px 12px";
+    document.body.appendChild(sparkleContainer);
 
-    document.body.appendChild(pattern);
+    const style = document.createElement("style");
 
-    // =========================
-    // 💗 SPARKLE HEARTS
-    // =========================
-    function createHeart() {
-
-        const heart = document.createElement("div");
-
-        heart.innerText = "💗";
-        heart.style.position = "fixed";
-        heart.style.left = "0px";
-        heart.style.top = Math.random() * window.innerHeight + "px";
-
-        heart.style.fontSize = (10 + Math.random() * 10) + "px";
-        heart.style.opacity = "0.8";
-        heart.style.pointerEvents = "none";
-        heart.style.zIndex = "9996";
-
-        document.body.appendChild(heart);
-
-        let pos = 0;
-
-        const interval = setInterval(() => {
-            pos += 2;
-            heart.style.left = pos + "px";
-            heart.style.opacity -= 0.01;
-
-            if (pos > window.innerWidth) {
-                clearInterval(interval);
-                heart.remove();
-            }
-        }, 16);
+    style.innerHTML = `
+    .sparkle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.2;
+        filter: blur(1px);
+        animation: sparkleMove linear infinite;
     }
 
-    // spawn contínuo
-    setInterval(createHeart, 800);
+    @keyframes sparkleMove {
+        from {
+            transform: translateX(0);
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.25;
+        }
+        to {
+            transform: translateX(60px);
+            opacity: 0;
+        }
+    }
+    `;
+
+    document.head.appendChild(style);
+
+    // cria várias estrelinhas
+    for (let i = 0; i < 25; i++) {
+        const s = document.createElement("div");
+        s.className = "sparkle";
+
+        // lado esquerdo OU direito
+        const side = Math.random() > 0.5 ? "left" : "right";
+
+        s.style.top = Math.random() * 100 + "%";
+        s.style[side] = "0px";
+
+        s.style.animationDuration = (2 + Math.random() * 3) + "s";
+        s.style.animationDelay = (Math.random() * 3) + "s";
+
+        sparkleContainer.appendChild(s);
+    }
+
+    console.log("Coquette Frame + Sparkles ✨ carregado");
 
 });
