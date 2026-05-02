@@ -296,44 +296,4 @@ jQuery(async () => {
         console.error(e);
     }
 
-})
-
-jQuery(async () => {
-
-    console.log("Cursor typing 💗");
-
-    try {
-
-        if (document.getElementById("coquette-cursor")) return;
-
-        await new Promise(r => setTimeout(r, 800));
-
-        const style = document.createElement("style");
-        style.id = "coquette-cursor";
-
-        style.innerHTML = `
-
-        @keyframes blinkCursor {
-            0%, 50%, 100% { opacity: 1; }
-            25%, 75% { opacity: 0; }
-        }
-
-        /* 💬 cursor no final do texto */
-        .mes_text::after {
-            content: "|";
-            margin-left: 4px;
-            animation: blinkCursor 1s infinite;
-            color: rgba(255,255,255,0.8);
-        }
-
-        `;
-
-        document.head.appendChild(style);
-
-        console.log("Cursor ativo ✨");
-
-    } catch (e) {
-        console.error(e);
-    }
-
 });
