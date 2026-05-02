@@ -22,7 +22,6 @@ setTimeout(() => {
     const header = document.createElement("div");
     header.id = "coquette-header";
 
-    // pega nome do personagem (fallback incluso)
     const charName =
         document.querySelector("#char_name")?.innerText ||
         document.querySelector(".character_name")?.innerText ||
@@ -45,12 +44,21 @@ setTimeout(() => {
 
     #coquette-header {
         position: fixed;
-        top: 120px; /* abaixo do top bar */
+        top: 110px; /* Ajustado um pouco para cima por causa do fundo */
         left: 50%;
         transform: translateX(-50%);
         z-index: 9999;
-        pointer-events: none; /* não atrapalha clique no chat */
+        pointer-events: none;
         text-align: center;
+        
+        /* 🎀 FUNDO PEROLADO */
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 245, 247, 0.25) 50%, rgba(255, 255, 255, 0.15) 100%);
+        backdrop-filter: blur(4px); /* Efeito de vidro fosco */
+        -webkit-backdrop-filter: blur(4px);
+        padding: 15px 40px;
+        border-radius: 50px; /* Bordas bem arredondadas */
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 15px rgba(212, 76, 140, 0.1);
     }
 
     #coquette-title {
