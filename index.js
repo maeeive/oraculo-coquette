@@ -79,7 +79,7 @@ setTimeout(() => {
 
 jQuery(async () => {
 
-    console.log("Coquette Frame 360° iniciando 💗");
+    console.log("Coquette Frame refinado 💗");
 
     try {
 
@@ -101,38 +101,38 @@ jQuery(async () => {
         container.style.pointerEvents = "none";
         container.style.zIndex = "9995";
 
-        // 💗 BORDA ROSA (voltou!)
+        // 💗 BORDA MAIS FINA
         container.style.boxShadow = `
-            inset 0 0 0 6px rgba(255,182,193,0.8),
-            inset 0 0 40px rgba(255,182,193,0.4)
+            inset 0 0 0 4px rgba(255,182,193,0.7),
+            inset 0 0 25px rgba(255,182,193,0.3)
         `;
 
         document.body.appendChild(container);
 
         // =========================
-        // ✨ STYLE (animações)
+        // ✨ STYLE
         // =========================
         const style = document.createElement("style");
 
         style.innerHTML = `
         @keyframes sparkleLeft {
-            0% { transform: translateX(0); opacity: 0.5; }
-            100% { transform: translateX(40px); opacity: 0; }
+            0% { transform: translateX(0); opacity: 0.8; }
+            100% { transform: translateX(70px); opacity: 0; }
         }
 
         @keyframes sparkleRight {
-            0% { transform: translateX(0); opacity: 0.5; }
-            100% { transform: translateX(-40px); opacity: 0; }
+            0% { transform: translateX(0); opacity: 0.8; }
+            100% { transform: translateX(-70px); opacity: 0; }
         }
 
         @keyframes sparkleTop {
-            0% { transform: translateY(0); opacity: 0.5; }
-            100% { transform: translateY(40px); opacity: 0; }
+            0% { transform: translateY(0); opacity: 0.8; }
+            100% { transform: translateY(70px); opacity: 0; }
         }
 
         @keyframes sparkleBottom {
-            0% { transform: translateY(0); opacity: 0.5; }
-            100% { transform: translateY(-40px); opacity: 0; }
+            0% { transform: translateY(0); opacity: 0.8; }
+            100% { transform: translateY(-70px); opacity: 0; }
         }
         `;
 
@@ -145,13 +145,13 @@ jQuery(async () => {
 
             const s = document.createElement("div");
 
-            // 💗 coração vazado pequeno
+            // 💗 coração mais visível
             s.innerText = "♡";
             s.style.position = "absolute";
-            s.style.fontSize = "8px";
-            s.style.color = "white";
-            s.style.opacity = "0.6";
-            s.style.textShadow = "0 0 6px rgba(255,255,255,0.8)";
+            s.style.fontSize = "10px";
+            s.style.color = "rgba(255,255,255,0.9)";
+            s.style.opacity = "0.85";
+            s.style.textShadow = "0 0 10px rgba(255,255,255,1)";
             s.style.pointerEvents = "none";
 
             const type = Math.floor(Math.random() * 4);
@@ -181,7 +181,7 @@ jQuery(async () => {
                 s.style.animation = "sparkleBottom " + duration + "s linear infinite";
             }
 
-            s.style.animationDelay = (Math.random() * 3) + "s";
+            s.style.animationDelay = (Math.random() * 2) + "s";
 
             container.appendChild(s);
 
@@ -191,15 +191,15 @@ jQuery(async () => {
         // =========================
         // ⏱ LOOP
         // =========================
-        setInterval(spawn, 150);
+        setInterval(spawn, 140);
 
-        console.log("Coquette Frame 360° ✨ carregado");
+        console.log("Coquette Frame refinado ✨");
 
     } catch (e) {
-        console.error("Erro na extensão:", e);
+        console.error("Erro:", e);
     }
 
-});
+})
 
 document.addEventListener("touchstart", function(e) {
 
