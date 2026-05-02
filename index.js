@@ -220,7 +220,7 @@ document.addEventListener("touchstart", function(e) {
 
 jQuery(async () => {
 
-    console.log("Coquette Glow INTENSO 💗");
+    console.log("Coquette Glow 💗");
 
     try {
 
@@ -253,31 +253,89 @@ jQuery(async () => {
         @keyframes coquetteBreath {
             0% {
                 box-shadow:
-                inset 0 0 80px rgba(255,182,193,0.25),
-                inset 0 0 150px rgba(255,182,193,0.15);
+                inset 0 0 40px rgba(255,182,193,0.15),
+                inset 0 0 80px rgba(255,182,193,0.1);
             }
 
             50% {
                 box-shadow:
-                inset 0 0 140px rgba(255,182,193,0.45),
-                inset 0 0 220px rgba(255,182,193,0.25);
+                inset 0 0 80px rgba(255,182,193,0.25),
+                inset 0 0 120px rgba(255,182,193,0.15);
             }
 
             100% {
                 box-shadow:
-                inset 0 0 80px rgba(255,182,193,0.25),
-                inset 0 0 150px rgba(255,182,193,0.15);
+                inset 0 0 40px rgba(255,182,193,0.15),
+                inset 0 0 80px rgba(255,182,193,0.1);
             }
         }
 
         #coquette-glow {
-            animation: coquetteBreath 5s ease-in-out infinite;
+            animation: coquetteBreath 6s ease-in-out infinite;
         }
         `;
 
         document.head.appendChild(style);
 
-        console.log("Glow forte ativado 💗");
+        console.log("Glow ativo 💗");
+
+    } catch (e) {
+        console.error(e);
+    }
+
+})
+
+jQuery(async () => {
+
+    console.log("Glass UI 💗");
+
+    try {
+
+        if (document.getElementById("coquette-glass")) return;
+
+        await new Promise(r => setTimeout(r, 800));
+
+        const style = document.createElement("style");
+
+        style.id = "coquette-glass";
+
+        style.innerHTML = `
+
+        /* 💗 mensagens */
+        .mes_block {
+            background: rgba(255,255,255,0.06) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            border: 1px solid rgba(255,255,255,0.15) !important;
+            border-radius: 16px !important;
+
+            box-shadow:
+                0 4px 20px rgba(0,0,0,0.25),
+                inset 0 0 10px rgba(255,255,255,0.05);
+        }
+
+        /* 💗 user vs bot nuance */
+        .mes[is_user="true"] .mes_block {
+            background: rgba(255,182,193,0.08) !important;
+        }
+
+        .mes[is_user="false"] .mes_block {
+            background: rgba(255,255,255,0.05) !important;
+        }
+
+        /* ✨ hover glow leve */
+        .mes_block:hover {
+            box-shadow:
+                0 6px 25px rgba(255,182,193,0.2),
+                inset 0 0 15px rgba(255,255,255,0.08);
+        }
+
+        `;
+
+        document.head.appendChild(style);
+
+        console.log("Glass UI aplicado ✨");
 
     } catch (e) {
         console.error(e);
