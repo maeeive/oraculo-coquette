@@ -216,42 +216,42 @@ jQuery(async () => {
 
 document.addEventListener("touchstart", function(e) {
 
-    const touch = e.touches[0];
-    const x = touch.clientX;
-    const y = touch.clientY;
+    const t = e.touches[0];
+    const x = t.clientX;
+    const y = t.clientY;
 
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 6; i++) {
 
-        const sparkle = document.createElement("div");
+        const s = document.createElement("div");
 
-        sparkle.style.position = "fixed";
-        sparkle.style.left = x + "px";
-        sparkle.style.top = y + "px";
-        sparkle.style.width = "4px";
-        sparkle.style.height = "4px";
-        sparkle.style.background = "white";
-        sparkle.style.borderRadius = "50%";
-        sparkle.style.pointerEvents = "none";
-        sparkle.style.zIndex = "999999";
+        s.style.position = "fixed";
+        s.style.left = x + "px";
+        s.style.top = y + "px";
+        s.style.width = "2px";
+        s.style.height = "2px";
+        s.style.background = "rgba(255,255,255,0.7)";
+        s.style.borderRadius = "50%";
+        s.style.pointerEvents = "none";
+        s.style.zIndex = "999999";
+        s.style.filter = "blur(0.5px)";
 
         const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * 60;
+        const dist = Math.random() * 30;
 
-        const moveX = Math.cos(angle) * distance;
-        const moveY = Math.sin(angle) * distance;
+        const moveX = Math.cos(angle) * dist;
+        const moveY = Math.sin(angle) * dist;
 
-        sparkle.animate([
-            { transform: "translate(0,0)", opacity: 1 },
+        s.animate([
+            { transform: "translate(0,0)", opacity: 0.7 },
             { transform: `translate(${moveX}px, ${moveY}px)`, opacity: 0 }
         ], {
-            duration: 600,
+            duration: 500,
             easing: "ease-out"
         });
 
-        document.body.appendChild(sparkle);
+        document.body.appendChild(s);
 
-        setTimeout(() => sparkle.remove(), 600);
+        setTimeout(() => s.remove(), 500);
     }
 
 });
-
