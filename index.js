@@ -213,3 +213,203 @@ jQuery(async () => {
     }
 
 });
+
+jQuery(async () => {
+
+    console.log("Coquette Ultimate iniciando 💗");
+
+    try {
+
+        if (document.getElementById("coquette-ultimate")) return;
+
+        await new Promise(r => setTimeout(r, 1200));
+
+        const root = document.createElement("div");
+        root.id = "coquette-ultimate";
+        root.style.pointerEvents = "none";
+        document.body.appendChild(root);
+
+        // =========================
+        // 💄 STYLE
+        // =========================
+        const style = document.createElement("style");
+        style.textContent = `
+        .cq-sparkle {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(1px);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes cq-fade {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.4; }
+            100% { opacity: 0; transform: scale(1.2); }
+        }
+
+        @keyframes cq-rise {
+            from { transform: translateY(0); opacity: 0.5; }
+            to { transform: translateY(-60px); opacity: 0; }
+        }
+
+        .cq-glow {
+            animation: cqGlow 2s ease-out;
+        }
+
+        @keyframes cqGlow {
+            0% { box-shadow: 0 0 20px rgba(255,182,193,0.8); }
+            100% { box-shadow: none; }
+        }
+
+        #cq-curtain {
+            position: fixed;
+            inset: 0;
+            background: rgba(255,182,193,0.25);
+            z-index: 9998;
+            pointer-events: none;
+            animation: cqCurtain 1.2s ease forwards;
+        }
+
+        @keyframes cqCurtain {
+            0% { clip-path: inset(0 0 0 0); }
+            100% { clip-path: inset(0 50% 0 50%); opacity: 0; }
+        }
+
+        #cq-panel {
+            position: fixed;
+            right: 15px;
+            bottom: 180px;
+            z-index: 9999;
+            pointer-events: auto;
+            font-size: 12px;
+        }
+
+        #cq-panel button {
+            background: rgba(255,182,193,0.2);
+            border: 1px solid pink;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 20px;
+        }
+        `;
+        document.head.appendChild(style);
+
+        // =========================
+        // 🎀 CORTINA
+        // =========================
+        const curtain = document.createElement("div");
+        curtain.id = "cq-curtain";
+        document.body.appendChild(curtain);
+
+        setTimeout(() => curtain.remove(), 1500);
+
+        // =========================
+        // ✨ PARTICULAS AMBIENTE
+        // =========================
+        function spawnAmbient() {
+            const s = document.createElement("div");
+            s.className = "cq-sparkle";
+
+            const side = Math.floor(Math.random() * 4);
+
+            if (side === 0) { s.style.left = "0"; s.style.top = Math.random()*100+"%"; }
+            if (side === 1) { s.style.right = "0"; s.style.top = Math.random()*100+"%"; }
+            if (side === 2) { s.style.top = "0"; s.style.left = Math.random()*100+"%"; }
+            if (side === 3) { s.style.bottom = "0"; s.style.left = Math.random()*100+"%"; }
+
+            s.style.animation = "cq-fade 3s linear";
+
+            document.body.appendChild(s);
+
+            setTimeout(() => s.remove(), 3000);
+        }
+
+        setInterval(spawnAmbient, 200);
+
+        // =========================
+        // ✨ TOQUE (GLITTER EXPLOSION)
+        // =========================
+        document.addEventListener("touchstart", (e) => {
+            const x = e.touches[0].clientX;
+            const y = e.touches[0].clientY;
+
+            for (let i = 0; i < 12; i++) {
+                const s = document.createElement("div");
+                s.className = "cq-sparkle";
+
+                s.style.left = x + "px";
+                s.style.top = y + "px";
+
+                const angle = Math.random() * Math.PI * 2;
+                const dist = Math.random() * 40;
+
+                s.style.transform = `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px)`;
+                s.style.animation = "cq-fade 1s ease-out";
+
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 1000);
+            }
+        });
+
+        // =========================
+        // 💗 GLOW EM NOVAS MENSAGENS
+        // =========================
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach(m => {
+                m.addedNodes.forEach(node => {
+                    if (node.classList && node.classList.contains("mes")) {
+                        node.classList.add("cq-glow");
+
+                        // corações subindo
+                        for (let i = 0; i < 3; i++) {
+                            const heart = document.createElement("div");
+                            heart.innerText = "♡";
+                            heart.style.position = "absolute";
+                            heart.style.left = "50%";
+                            heart.style.bottom = "0";
+                            heart.style.fontSize = "12px";
+                            heart.style.color = "pink";
+                            heart.style.animation = "cq-rise 1.5s ease-out";
+                            node.appendChild(heart);
+
+                            setTimeout(() => heart.remove(), 1500);
+                        }
+                    }
+                });
+            });
+        });
+
+        const chat = document.getElementById("chat");
+        if (chat) observer.observe(chat, { childList: true, subtree: true });
+
+        // =========================
+        // 🎛️ MINI PAINEL
+        // =========================
+        const panel = document.createElement("div");
+        panel.id = "cq-panel";
+
+        const btn = document.createElement("button");
+        btn.innerText = "🎀 FX";
+
+        let enabled = true;
+
+        btn.onclick = () => {
+            enabled = !enabled;
+            document.body.style.filter = enabled ? "" : "none";
+        };
+
+        panel.appendChild(btn);
+        document.body.appendChild(panel);
+
+        console.log("Coquette Ultimate carregado ✨💗");
+
+    } catch (e) {
+        console.error("Erro:", e);
+    }
+
+});
