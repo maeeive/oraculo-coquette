@@ -92,7 +92,7 @@ jQuery(async () => {
     frame.style.top = "0";
     frame.style.left = "0";
     frame.style.width = "100vw";
-    frame.style.height = "calc(100vh - 83px)"; // 🔥 FIX AQUI
+    frame.style.height = "calc(100vh - 75px)"; // 🔥 FIX AQUI
     frame.style.pointerEvents = "none";
     frame.style.zIndex = "9995";
 
