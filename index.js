@@ -220,7 +220,7 @@ document.addEventListener("touchstart", function(e) {
 
 jQuery(async () => {
 
-    console.log("Coquette Glow 💗");
+    console.log("Coquette Glow INTENSO 💗");
 
     try {
 
@@ -253,34 +253,35 @@ jQuery(async () => {
         @keyframes coquetteBreath {
             0% {
                 box-shadow:
-                inset 0 0 40px rgba(255,182,193,0.15),
-                inset 0 0 80px rgba(255,182,193,0.1);
+                inset 0 0 80px rgba(255,182,193,0.25),
+                inset 0 0 150px rgba(255,182,193,0.15);
             }
 
             50% {
                 box-shadow:
-                inset 0 0 80px rgba(255,182,193,0.25),
-                inset 0 0 120px rgba(255,182,193,0.15);
+                inset 0 0 140px rgba(255,182,193,0.45),
+                inset 0 0 220px rgba(255,182,193,0.25);
             }
 
             100% {
                 box-shadow:
-                inset 0 0 40px rgba(255,182,193,0.15),
-                inset 0 0 80px rgba(255,182,193,0.1);
+                inset 0 0 80px rgba(255,182,193,0.25),
+                inset 0 0 150px rgba(255,182,193,0.15);
             }
         }
 
         #coquette-glow {
-            animation: coquetteBreath 6s ease-in-out infinite;
+            animation: coquetteBreath 5s ease-in-out infinite;
         }
         `;
 
         document.head.appendChild(style);
 
-        console.log("Glow ativo 💗");
+        console.log("Glow forte ativado 💗");
 
     } catch (e) {
         console.error(e);
     }
 
-});
+})
+
