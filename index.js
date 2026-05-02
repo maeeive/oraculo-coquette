@@ -101,6 +101,12 @@ jQuery(async () => {
         container.style.pointerEvents = "none";
         container.style.zIndex = "9995";
 
+        // 💗 BORDA ROSA (voltou!)
+        container.style.boxShadow = `
+            inset 0 0 0 6px rgba(255,182,193,0.8),
+            inset 0 0 40px rgba(255,182,193,0.4)
+        `;
+
         document.body.appendChild(container);
 
         // =========================
@@ -152,28 +158,24 @@ jQuery(async () => {
             const duration = (Math.random() * 2 + 2).toFixed(2);
 
             if (type === 0) {
-                // esquerda
                 s.style.left = "0px";
                 s.style.top = Math.random() * 100 + "%";
                 s.style.animation = "sparkleLeft " + duration + "s linear infinite";
             }
 
             if (type === 1) {
-                // direita
                 s.style.right = "0px";
                 s.style.top = Math.random() * 100 + "%";
                 s.style.animation = "sparkleRight " + duration + "s linear infinite";
             }
 
             if (type === 2) {
-                // topo
                 s.style.top = "0px";
                 s.style.left = Math.random() * 100 + "%";
                 s.style.animation = "sparkleTop " + duration + "s linear infinite";
             }
 
             if (type === 3) {
-                // baixo
                 s.style.bottom = "0px";
                 s.style.left = Math.random() * 100 + "%";
                 s.style.animation = "sparkleBottom " + duration + "s linear infinite";
@@ -183,7 +185,6 @@ jQuery(async () => {
 
             container.appendChild(s);
 
-            // remove depois de um tempo pra não acumular
             setTimeout(() => s.remove(), duration * 1000);
         }
 
@@ -198,7 +199,7 @@ jQuery(async () => {
         console.error("Erro na extensão:", e);
     }
 
-})
+});
 
 document.addEventListener("touchstart", function(e) {
 
