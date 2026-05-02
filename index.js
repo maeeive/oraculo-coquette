@@ -256,27 +256,36 @@ document.addEventListener("touchstart", function(e) {
 
 })
 
-let lastCount = 0;
+(function () {
 
-setInterval(() => {
+    if (document.getElementById("coquette-curtain")) return;
 
-    const mensagens = document.querySelectorAll(".mes");
+    const curtain = document.createElement("div");
+    curtain.id = "coquette-curtain";
 
-    if (!mensagens.length) return;
+    curtain.style.position = "fixed";
+    curtain.style.top = "0";
+    curtain.style.left = "0";
+    curtain.style.width = "100vw";
+    curtain.style.height = "100vh";
+    curtain.style.zIndex = "9998";
+    curtain.style.pointerEvents = "none";
 
-    if (mensagens.length > lastCount) {
+    // gradiente mais aesthetic
+    curtain.style.background = "linear-gradient(90deg, rgba(255,182,193,0.6), rgba(255,192,203,0.4))";
 
-        const nova = mensagens[mensagens.length - 1];
+    curtain.style.transition = "all 1s ease";
 
-        nova.style.transition = "box-shadow 0.6s ease";
+    document.body.appendChild(curtain);
 
-        nova.style.boxShadow = "0 0 18px rgba(255,182,193,0.6)";
+    // animação abrindo no meio
+    requestAnimationFrame(() => {
+        curtain.style.clipPath = "inset(0 50% 0 50%)";
+        curtain.style.opacity = "0";
+    });
 
-        setTimeout(() => {
-            nova.style.boxShadow = "none";
-        }, 1200);
+    setTimeout(() => {
+        curtain.remove();
+    }, 1200);
 
-        lastCount = mensagens.length;
-    }
-
-}, 600);
+})();
