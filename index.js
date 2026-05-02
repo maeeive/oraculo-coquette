@@ -22,14 +22,9 @@ setTimeout(() => {
     const header = document.createElement("div");
     header.id = "coquette-header";
 
-    const charName =
-        document.querySelector("#char_name")?.innerText ||
-        document.querySelector(".character_name")?.innerText ||
-        "my love";
-
     header.innerHTML = `
-        <div id="coquette-title">🎀 ${charName} 🎀</div>
-        <div id="coquette-sub">♡ dreamy coquette v2 ♡</div>
+        <div id="coquette-title">🎀 My Love 🎀</div>
+        <div id="coquette-sub">♡ dreamy coquette ♡</div>
     `;
 
     document.body.appendChild(header);
@@ -44,7 +39,7 @@ setTimeout(() => {
 
     #coquette-header {
         position: fixed;
-        top: 110px; /* Ajustado um pouco para cima por causa do fundo */
+        top: 135px; /* Ajustado conforme seu pedido */
         left: 50%;
         transform: translateX(-50%);
         z-index: 9999;
@@ -53,10 +48,10 @@ setTimeout(() => {
         
         /* 🎀 FUNDO PEROLADO */
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 245, 247, 0.25) 50%, rgba(255, 255, 255, 0.15) 100%);
-        backdrop-filter: blur(4px); /* Efeito de vidro fosco */
+        backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
         padding: 15px 40px;
-        border-radius: 50px; /* Bordas bem arredondadas */
+        border-radius: 50px;
         border: 1px solid rgba(255, 255, 255, 0.3);
         box-shadow: 0 4px 15px rgba(212, 76, 140, 0.1);
     }
