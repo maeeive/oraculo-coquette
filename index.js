@@ -212,5 +212,46 @@ jQuery(async () => {
         console.error("Erro na extensão:", e);
     }
 
+})
+
+document.addEventListener("touchstart", function(e) {
+
+    const touch = e.touches[0];
+    const x = touch.clientX;
+    const y = touch.clientY;
+
+    for (let i = 0; i < 12; i++) {
+
+        const sparkle = document.createElement("div");
+
+        sparkle.style.position = "fixed";
+        sparkle.style.left = x + "px";
+        sparkle.style.top = y + "px";
+        sparkle.style.width = "4px";
+        sparkle.style.height = "4px";
+        sparkle.style.background = "white";
+        sparkle.style.borderRadius = "50%";
+        sparkle.style.pointerEvents = "none";
+        sparkle.style.zIndex = "999999";
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 60;
+
+        const moveX = Math.cos(angle) * distance;
+        const moveY = Math.sin(angle) * distance;
+
+        sparkle.animate([
+            { transform: "translate(0,0)", opacity: 1 },
+            { transform: `translate(${moveX}px, ${moveY}px)`, opacity: 0 }
+        ], {
+            duration: 600,
+            easing: "ease-out"
+        });
+
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => sparkle.remove(), 600);
+    }
+
 });
 
