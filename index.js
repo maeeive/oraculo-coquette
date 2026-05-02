@@ -6,7 +6,7 @@ setTimeout(() => {
     // 🎀 FONTES
     // =========================
     const font1 = document.createElement("link");
-    font1.href = "https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&display=swap";
+    font1.href = "https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap";
     font1.rel = "stylesheet";
 
     const font2 = document.createElement("link");
@@ -24,7 +24,7 @@ setTimeout(() => {
 
     header.innerHTML = `
         <div id="coquette-title">🎀 My Love 🎀</div>
-        <div id="coquette-sub">♡ dreamy coquette ♡</div>
+        <div id="coquette-sub">♡ dreamy coquette v2 ♡</div>
     `;
 
     document.body.appendChild(header);
@@ -39,41 +39,40 @@ setTimeout(() => {
 
     #coquette-header {
         position: fixed;
-        top: 135px; /* Ajustado conforme seu pedido */
+        top: 135px; 
         left: 50%;
         transform: translateX(-50%);
         z-index: 9999;
         pointer-events: none;
         text-align: center;
         
-        /* 🎀 FUNDO PEROLADO */
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 245, 247, 0.25) 50%, rgba(255, 255, 255, 0.15) 100%);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        padding: 15px 40px;
-        border-radius: 50px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 0 4px 15px rgba(212, 76, 140, 0.1);
+        /* 🎀 FUNDO PEROLADO COMPACTO */
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 245, 247, 0.20) 50%, rgba(255, 255, 255, 0.12) 100%);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+        padding: 10px 25px; /* Diminuído o preenchimento */
+        border-radius: 40px; 
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 4px 10px rgba(212, 76, 140, 0.08);
     }
 
     #coquette-title {
-        font-family: 'Ballet', cursive;
-        font-size: 34px;
+        font-family: 'Pixelify Sans', sans-serif;
+        font-size: 26px; /* Tamanho reduzido */
         color: #FFB2C4;
         text-shadow:
-            0 0 6px rgba(212, 76, 140, 0.8),
-            0 0 6px rgba(212, 76, 140, 0.8);
+            0 0 5px rgba(212, 76, 140, 0.8),
+            0 0 5px rgba(212, 76, 140, 0.8);
     }
 
     #coquette-sub {
         font-family: 'Great Vibes', cursive;
-        font-size: 19px;
+        font-size: 15px; /* Tamanho reduzido */
         color: #FFB2C4;
         opacity: 0.9;
-        letter-spacing: 2px;
-        text-shadow: 0 0 6px rgba(212, 76, 140, 0.8),
-        0 0 6px rgba(212, 76, 140, 0.8);
-        margin-top: -5px;
+        letter-spacing: 1.5px;
+        text-shadow: 0 0 5px rgba(212, 76, 140, 0.8);
+        margin-top: -2px;
     }
     `;
 
