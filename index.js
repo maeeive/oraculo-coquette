@@ -47,7 +47,7 @@ setTimeout(() => {
 
     #coquette-header {
         position: fixed;
-        top: 100px; /* abaixo do top bar */
+        top: 250px; /* abaixo do top bar */
         left: 50%;
         transform: translateX(-50%);
         z-index: 9999;
@@ -72,12 +72,6 @@ setTimeout(() => {
         text-shadow: 0 0 6px rgba(212, 76, 140, 0.8);
         margin-top: -5px;
     }
-
-    /* 💗 espaço pro header não cobrir mensagens */
-    #chat {
-        padding-top: 80px !important;
-    }
-
     `;
 
     document.head.appendChild(style);
