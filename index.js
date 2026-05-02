@@ -79,12 +79,15 @@ setTimeout(() => {
 
 jQuery(async () => {
 
-    console.log("Coquette Frame iniciando 🎀");
+    console.log("Coquette Frame V2 🎀");
 
     if (document.getElementById("coquette-frame")) return;
 
     await new Promise(r => setTimeout(r, 1000));
 
+    // =========================
+    // 💗 FRAME BASE
+    // =========================
     const frame = document.createElement("div");
     frame.id = "coquette-frame";
 
@@ -92,39 +95,70 @@ jQuery(async () => {
     frame.style.top = "0";
     frame.style.left = "0";
     frame.style.width = "100vw";
-    frame.style.height = "calc(100vh - 53px)"; // 🔥 FIX AQUI
+    frame.style.height = "calc(100vh - 10px)";
     frame.style.pointerEvents = "none";
     frame.style.zIndex = "9995";
 
+    // 💗 borda + glow
     frame.style.boxShadow = `
         inset 0 0 0 5px rgba(255,182,193,0.9),
-        inset 0 0 60px rgba(255,182,193,0.25)
+        inset 0 0 30px rgba(255,182,193,0.25)
     `;
 
     document.body.appendChild(frame);
 
-    const corners = [
-        ["top","left"],
-        ["top","right"],
-        ["bottom","left"],
-        ["bottom","right"]
-    ];
+    // =========================
+    // 🧵 ESTAMPA NA BORDA
+    // =========================
+    const pattern = document.createElement("div");
 
-    corners.forEach(([v,h]) => {
-        const bow = document.createElement("div");
+    pattern.style.position = "fixed";
+    pattern.style.top = "0";
+    pattern.style.left = "0";
+    pattern.style.width = "100vw";
+    pattern.style.height = "calc(100vh - 10px)";
+    pattern.style.pointerEvents = "none";
+    pattern.style.zIndex = "9994";
 
-        bow.innerText = "🎀";
-        bow.style.position = "fixed";
-        bow.style[v] = "4px";
-        bow.style[h] = "4px";
-        bow.style.fontSize = "18px";
-        bow.style.zIndex = "9996";
-        bow.style.pointerEvents = "none";
-        bow.style.textShadow = "0 0 8px pink";
+    pattern.style.backgroundImage = "radial-gradient(rgba(255,182,193,0.15) 1px, transparent 1px)";
+    pattern.style.backgroundSize = "12px 12px";
 
-        document.body.appendChild(bow);
-    });
+    document.body.appendChild(pattern);
 
-    console.log("Coquette Frame carregado 💗");
+    // =========================
+    // 💗 SPARKLE HEARTS
+    // =========================
+    function createHeart() {
+
+        const heart = document.createElement("div");
+
+        heart.innerText = "💗";
+        heart.style.position = "fixed";
+        heart.style.left = "0px";
+        heart.style.top = Math.random() * window.innerHeight + "px";
+
+        heart.style.fontSize = (10 + Math.random() * 10) + "px";
+        heart.style.opacity = "0.8";
+        heart.style.pointerEvents = "none";
+        heart.style.zIndex = "9996";
+
+        document.body.appendChild(heart);
+
+        let pos = 0;
+
+        const interval = setInterval(() => {
+            pos += 2;
+            heart.style.left = pos + "px";
+            heart.style.opacity -= 0.01;
+
+            if (pos > window.innerWidth) {
+                clearInterval(interval);
+                heart.remove();
+            }
+        }, 16);
+    }
+
+    // spawn contínuo
+    setInterval(createHeart, 800);
 
 });
