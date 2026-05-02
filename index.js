@@ -285,3 +285,46 @@ jQuery(async () => {
 
 })
 
+jQuery(async () => {
+
+    console.log("Typing Reveal 💗");
+
+    try {
+
+        if (document.getElementById("coquette-typing")) return;
+
+        await new Promise(r => setTimeout(r, 800));
+
+        const style = document.createElement("style");
+        style.id = "coquette-typing";
+
+        style.innerHTML = `
+
+        @keyframes typingReveal {
+            from {
+                clip-path: inset(0 100% 0 0);
+                opacity: 0;
+            }
+            to {
+                clip-path: inset(0 0% 0 0);
+                opacity: 1;
+            }
+        }
+
+        /* 💬 aplica só no texto */
+        .mes_text {
+            animation: typingReveal 1.2s ease-out;
+        }
+
+        `;
+
+        document.head.appendChild(style);
+
+        console.log("Typing reveal ativo ✨");
+
+    } catch (e) {
+        console.error(e);
+    }
+
+})
+
