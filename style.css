@@ -1,91 +1,82 @@
-setTimeout(() => {
+setTimeout(() => {    
 
-    if (document.getElementById("coquette-frame")) return;
+    if (document.getElementById("coquette-frame")) return;    
 
-    // =========================
-    // 💗 CONTAINER
-    // =========================
-    const frame = document.createElement("div");
-    frame.id = "coquette-frame";
-    document.body.appendChild(frame);
+    const frame = document.createElement("div");    
+    frame.id = "coquette-frame";    
+    document.body.appendChild(frame);    
 
-    // =========================
-    // 🎀 BORDAS (4 lados)
-    // =========================
-    const sides = ["top","bottom","left","right"];
+    const sides = ["top","bottom","left","right"];    
 
-    sides.forEach(side => {
-        const div = document.createElement("div");
-        div.className = "coquette-side coquette-" + side;
-        frame.appendChild(div);
-    });
+    sides.forEach(side => {    
+        const div = document.createElement("div");    
+        div.className = "coquette-side coquette-" + side;    
+        frame.appendChild(div);    
+    });    
 
-    // =========================
-    // 🎀 LACINHOS (cantos)
-    // =========================
-    const corners = ["tl","tr","bl","br"];
+    const corners = ["tl","tr","bl","br"];    
 
-    corners.forEach(c => {
-        const bow = document.createElement("div");
-        bow.className = "coquette-bow " + c;
-        bow.innerText = "🎀";
-        frame.appendChild(bow);
-    });
+    corners.forEach(c => {    
+        const bow = document.createElement("div");    
+        bow.className = "coquette-bow " + c;    
+        bow.innerText = "🎀";    
+        frame.appendChild(bow);    
+    });    
 
-    // =========================
-    // 💄 STYLE
-    // =========================
-    const style = document.createElement("style");
+    const style = document.createElement("style");    
 
-    style.innerHTML = `
+    style.innerHTML = `    
 
-    #coquette-frame {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 9990; /* abaixo do header */
+    #coquette-frame {    
+        position: fixed;    
+        inset: 0;    
+        pointer-events: none;    
+        z-index: 9990;
+    }    
+
+    .coquette-side {    
+        position: absolute;    
+        background: rgba(255,182,193,0.8);    
+        box-shadow: 0 0 10px rgba(255,182,193,0.5);    
+    }    
+
+    /* 💗 simples e seguro */
+    .coquette-top { 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 6px; 
     }
 
-    .coquette-side {
-        position: absolute;
-        background: rgba(255,182,193,0.9);
-        box-shadow: 0 0 20px rgba(255,182,193,0.6);
+    .coquette-bottom { 
+        bottom: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 6px; 
     }
 
-    .coquette-top,
-    .coquette-bottom {
-        height: 12px;
-        width: 100%;
-        left: 0;
+    .coquette-left { 
+        top: 0; 
+        left: 0; 
+        width: 6px; 
+        height: 100%; 
     }
 
-    .coquette-top { top: 0; }
-    .coquette-bottom { bottom: 0; }
-
-    .coquette-left,
-    .coquette-right {
-        width: 12px;
-        height: 100%;
-        top: 0;
+    .coquette-right { 
+        top: 0; 
+        right: 0; 
+        width: 6px; 
+        height: 100%; 
     }
 
-    .coquette-left { left: 0; }
-    .coquette-right { right: 0; }
+    /* 🎀 bows garantidos visíveis */
+    .coquette-bow {    
+        position: fixed;    
+        font-size: 18px;    
+        z-index: 9999;
+        text-shadow: 0 0 6px pink;    
+    }    
 
-    /* 🎀 bows */
-    .coquette-bow {
-        position: absolute;
-        font-size: 20px;
-        text-shadow: 0 0 10px pink;
-    }
-
-    .tl { top: 5px; left: 5px; }
-    .tr { top: 5px; right: 5px; }
-    .bl { bottom: 5px; left: 5px; }
-    .br { bottom: 5px; right: 5px; }
-
-    `;
-
-    document.head.appendChild(style);
-
-}, 500);
+    .tl { top: 2px; left: 2px; }    
+    .tr { top: 2px; right: 2px; }    
+    .bl
