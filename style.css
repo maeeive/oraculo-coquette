@@ -1,81 +1,91 @@
-setTimeout(() => {    
+setTimeout(() => {
 
-    if (document.getElementById("coquette-frame")) return;    
+    if (document.getElementById("coquette-frame")) return;
 
-    const frame = document.createElement("div");    
-    frame.id = "coquette-frame";    
-    document.body.appendChild(frame);    
+    // =========================
+    // 💗 CONTAINER
+    // =========================
+    const frame = document.createElement("div");
+    frame.id = "coquette-frame";
+    document.body.appendChild(frame);
 
-    const sides = ["top","bottom","left","right"];    
+    // =========================
+    // 🎀 BORDAS (4 lados)
+    // =========================
+    const sides = ["top","bottom","left","right"];
 
-    sides.forEach(side => {    
-        const div = document.createElement("div");    
-        div.className = "coquette-side coquette-" + side;    
-        frame.appendChild(div);    
-    });    
+    sides.forEach(side => {
+        const div = document.createElement("div");
+        div.className = "coquette-side coquette-" + side;
+        frame.appendChild(div);
+    });
 
-    const corners = ["tl","tr","bl","br"];    
+    // =========================
+    // 🎀 LACINHOS (cantos)
+    // =========================
+    const corners = ["tl","tr","bl","br"];
 
-    corners.forEach(c => {    
-        const bow = document.createElement("div");    
-        bow.className = "coquette-bow " + c;    
-        bow.innerText = "🎀";    
-        frame.appendChild(bow);    
-    });    
+    corners.forEach(c => {
+        const bow = document.createElement("div");
+        bow.className = "coquette-bow " + c;
+        bow.innerText = "🎀";
+        frame.appendChild(bow);
+    });
 
-    const style = document.createElement("style");    
+    // =========================
+    // 💄 STYLE
+    // =========================
+    const style = document.createElement("style");
 
-    style.innerHTML = `    
+    style.innerHTML = `
 
-    #coquette-frame {    
-        position: fixed;    
-        inset: 0;    
-        pointer-events: none;    
-        z-index: 9990;
-    }    
+    #coquette-frame {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9990; /* abaixo do header */
+    }
 
-    .coquette-side {    
-        position: absolute;    
-        background: rgba(255,182,193,0.85);    
-        box-shadow: 0 0 15px rgba(255,182,193,0.5);    
-    }    
+    .coquette-side {
+        position: absolute;
+        background: rgba(255,182,193,0.9);
+        box-shadow: 0 0 20px rgba(255,182,193,0.6);
+    }
 
-    /* 💗 TOP / BOTTOM com margem interna */
-    .coquette-top,    
-    .coquette-bottom {    
-        height: 8px;    
-        width: calc(100% - 20px);    
-        left: 10px;    
-    }    
+    .coquette-top,
+    .coquette-bottom {
+        height: 12px;
+        width: 100%;
+        left: 0;
+    }
 
-    .coquette-top { top: 10px; }    
-    .coquette-bottom { bottom: 10px; }    
+    .coquette-top { top: 0; }
+    .coquette-bottom { bottom: 0; }
 
-    /* 💗 LADOS */
-    .coquette-left,    
-    .coquette-right {    
-        width: 8px;    
-        height: calc(100% - 20px);    
-        top: 10px;    
-    }    
+    .coquette-left,
+    .coquette-right {
+        width: 12px;
+        height: 100%;
+        top: 0;
+    }
 
-    .coquette-left { left: 10px; }    
-    .coquette-right { right: 10px; }    
+    .coquette-left { left: 0; }
+    .coquette-right { right: 0; }
 
-    /* 🎀 bows ajustados */
-    .coquette-bow {    
-        position: absolute;    
-        font-size: 16px;    
-        text-shadow: 0 0 8px pink;    
-    }    
+    /* 🎀 bows */
+    .coquette-bow {
+        position: absolute;
+        font-size: 20px;
+        text-shadow: 0 0 10px pink;
+    }
 
-    .tl { top: 4px; left: 4px; }    
-    .tr { top: 4px; right: 4px; }    
-    .bl { bottom: 4px; left: 4px; }    
-    .br { bottom: 4px; right: 4px; }    
+    .tl { top: 5px; left: 5px; }
+    .tr { top: 5px; right: 5px; }
+    .bl { bottom: 5px; left: 5px; }
+    .br { bottom: 5px; right: 5px; }
 
-    `;    
+    `;
 
-    document.head.appendChild(style);    
+    document.head.appendChild(style);
 
 }, 500);
