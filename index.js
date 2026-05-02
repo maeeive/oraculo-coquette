@@ -122,7 +122,9 @@ jQuery(async () => {
 
         document.body.appendChild(container);
 
-        // CSS separado (sem template quebrando)
+        // =========================
+        // 💄 STYLE
+        // =========================
         const style = document.createElement("style");
         style.textContent = `
         .sparkle {
@@ -146,25 +148,57 @@ jQuery(async () => {
             50% { opacity: 0.25; }
             100% { transform: translateX(-60px); opacity: 0; }
         }
+
+        @keyframes sparkleTop {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 0.25; }
+            100% { transform: translateY(60px); opacity: 0; }
+        }
+
+        @keyframes sparkleBottom {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 0.25; }
+            100% { transform: translateY(-60px); opacity: 0; }
+        }
         `;
         document.head.appendChild(style);
 
-        // gerar partículas
-        for (let i = 0; i < 25; i++) {
+        // =========================
+        // ✨ GERAR SPARKLES
+        // =========================
+        for (let i = 0; i < 40; i++) {
             const s = document.createElement("div");
             s.className = "sparkle";
 
-            const isLeft = Math.random() > 0.5;
-            s.style.top = Math.random() * 100 + "%";
-
+            const type = Math.floor(Math.random() * 4);
             const duration = 2 + Math.random() * 3;
 
-            if (isLeft) {
+            if (type === 0) {
+                // esquerda
                 s.style.left = "0px";
+                s.style.top = Math.random() * 100 + "%";
                 s.style.animation = "sparkleLeft " + duration + "s linear infinite";
-            } else {
+            }
+
+            if (type === 1) {
+                // direita
                 s.style.right = "0px";
+                s.style.top = Math.random() * 100 + "%";
                 s.style.animation = "sparkleRight " + duration + "s linear infinite";
+            }
+
+            if (type === 2) {
+                // topo
+                s.style.top = "0px";
+                s.style.left = Math.random() * 100 + "%";
+                s.style.animation = "sparkleTop " + duration + "s linear infinite";
+            }
+
+            if (type === 3) {
+                // baixo
+                s.style.bottom = "0px";
+                s.style.left = Math.random() * 100 + "%";
+                s.style.animation = "sparkleBottom " + duration + "s linear infinite";
             }
 
             s.style.animationDelay = (Math.random() * 3) + "s";
@@ -172,7 +206,7 @@ jQuery(async () => {
             container.appendChild(s);
         }
 
-        console.log("Coquette Frame carregado 💗");
+        console.log("Coquette Frame 360° ✨ carregado");
 
     } catch (e) {
         console.error("Erro na extensão:", e);
