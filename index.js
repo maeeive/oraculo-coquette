@@ -39,40 +39,37 @@ setTimeout(() => {
 
     #coquette-header {
         position: fixed;
-        top: 50px; 
+        top: 40px; /* Bem mais alto conforme pedido */
         left: 50%;
         transform: translateX(-50%);
         z-index: 9999;
         pointer-events: none;
         text-align: center;
         
-        /* 🎀 FUNDO PEROLADO COMPACTO */
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 245, 247, 0.20) 50%, rgba(255, 255, 255, 0.12) 100%);
-        backdrop-filter: blur(3px);
-        -webkit-backdrop-filter: blur(3px);
-        padding: 10px 25px; /* Diminuído o preenchimento */
-        border-radius: 40px; 
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        box-shadow: 0 4px 10px rgba(212, 76, 140, 0.08);
+        /* 🎀 FUNDO PEROLADO ULTRA COMPACTO */
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 245, 247, 0.18) 50%, rgba(255, 255, 255, 0.1) 100%);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        padding: 6px 18px; /* Reduzido ainda mais */
+        border-radius: 30px; 
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     #coquette-title {
         font-family: 'Pixelify Sans', sans-serif;
-        font-size: 26px; /* Tamanho reduzido */
+        font-size: 20px; /* Reduzido de 26px para 20px */
         color: #FFB2C4;
-        text-shadow:
-            0 0 5px rgba(212, 76, 140, 0.8),
-            0 0 5px rgba(212, 76, 140, 0.8);
+        text-shadow: 0 0 4px rgba(212, 76, 140, 0.8);
     }
 
     #coquette-sub {
         font-family: 'Great Vibes', cursive;
-        font-size: 15px; /* Tamanho reduzido */
+        font-size: 12px; /* Reduzido de 15px para 12px */
         color: #FFB2C4;
-        opacity: 0.9;
-        letter-spacing: 1.5px;
-        text-shadow: 0 0 5px rgba(212, 76, 140, 0.8);
-        margin-top: -2px;
+        opacity: 0.8;
+        letter-spacing: 1px;
+        text-shadow: 0 0 3px rgba(212, 76, 140, 0.6);
+        margin-top: -3px;
     }
     `;
 
