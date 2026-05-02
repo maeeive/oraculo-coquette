@@ -79,7 +79,7 @@ setTimeout(() => {
 
 jQuery(async () => {
 
-    console.log("Coquette Frame estrelas fluxo 💗");
+    console.log("Coquette lateral ✨");
 
     try {
 
@@ -109,7 +109,7 @@ jQuery(async () => {
         document.body.appendChild(container);
 
         // =========================
-        // ✨ STYLE (movimento MAIS LONGO)
+        // ✨ STYLE
         // =========================
         const style = document.createElement("style");
 
@@ -122,16 +122,6 @@ jQuery(async () => {
         @keyframes sparkleRight {
             0% { transform: translateX(0); opacity: 0.8; }
             100% { transform: translateX(-140px); opacity: 0; }
-        }
-
-        @keyframes sparkleTop {
-            0% { transform: translateY(0); opacity: 0.8; }
-            100% { transform: translateY(140px); opacity: 0; }
-        }
-
-        @keyframes sparkleBottom {
-            0% { transform: translateY(0); opacity: 0.8; }
-            100% { transform: translateY(-140px); opacity: 0; }
         }
         `;
 
@@ -152,31 +142,21 @@ jQuery(async () => {
             s.style.textShadow = "0 0 10px rgba(255,255,255,1)";
             s.style.pointerEvents = "none";
 
-            const type = Math.floor(Math.random() * 4);
+            const type = Math.floor(Math.random() * 2); // só 0 e 1
             const duration = (Math.random() * 2 + 2.5).toFixed(2);
 
             if (type === 0) {
+                // esquerda → direita
                 s.style.left = "0px";
                 s.style.top = Math.random() * 100 + "%";
                 s.style.animation = "sparkleLeft " + duration + "s ease-out infinite";
             }
 
             if (type === 1) {
+                // direita → esquerda
                 s.style.right = "0px";
                 s.style.top = Math.random() * 100 + "%";
                 s.style.animation = "sparkleRight " + duration + "s ease-out infinite";
-            }
-
-            if (type === 2) {
-                s.style.top = "0px";
-                s.style.left = Math.random() * 100 + "%";
-                s.style.animation = "sparkleTop " + duration + "s ease-out infinite";
-            }
-
-            if (type === 3) {
-                s.style.bottom = "0px";
-                s.style.left = Math.random() * 100 + "%";
-                s.style.animation = "sparkleBottom " + duration + "s ease-out infinite";
             }
 
             s.style.animationDelay = (Math.random() * 2) + "s";
@@ -188,7 +168,7 @@ jQuery(async () => {
 
         setInterval(spawn, 140);
 
-        console.log("✨ fluxo ativado");
+        console.log("✨ lateral flow ativo");
 
     } catch (e) {
         console.error("Erro:", e);
