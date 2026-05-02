@@ -79,7 +79,7 @@ setTimeout(() => {
 
 jQuery(async () => {
 
-    console.log("Coquette Frame iniciando ✨");
+    console.log("Coquette Frame 360° iniciando 💗");
 
     try {
 
@@ -88,29 +88,10 @@ jQuery(async () => {
         await new Promise(r => setTimeout(r, 1000));
 
         // =========================
-        // 💗 FRAME
-        // =========================
-        const frame = document.createElement("div");
-        frame.id = "coquette-frame";
-
-        frame.style.position = "fixed";
-        frame.style.top = "0";
-        frame.style.left = "0";
-        frame.style.width = "100vw";
-        frame.style.height = "calc(100vh - 1px)";
-        frame.style.pointerEvents = "none";
-        frame.style.zIndex = "9995";
-
-        frame.style.boxShadow =
-            "inset 0 0 0 5px rgba(255,182,193,0.9), inset 0 0 30px rgba(255,182,193,0.25)";
-
-        document.body.appendChild(frame);
-
-        // =========================
-        // ✨ SPARKLES
+        // 💗 CONTAINER
         // =========================
         const container = document.createElement("div");
-        container.id = "coquette-sparkles";
+        container.id = "coquette-frame";
 
         container.style.position = "fixed";
         container.style.top = "0";
@@ -118,60 +99,57 @@ jQuery(async () => {
         container.style.width = "100vw";
         container.style.height = "100vh";
         container.style.pointerEvents = "none";
-        container.style.zIndex = "9996";
+        container.style.zIndex = "9995";
 
         document.body.appendChild(container);
 
         // =========================
-        // 💄 STYLE
+        // ✨ STYLE (animações)
         // =========================
         const style = document.createElement("style");
-        style.textContent = `
-        .sparkle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.2;
-            filter: blur(1px);
-        }
 
+        style.innerHTML = `
         @keyframes sparkleLeft {
-            0% { transform: translateX(0); opacity: 0; }
-            50% { opacity: 0.25; }
-            100% { transform: translateX(60px); opacity: 0; }
+            0% { transform: translateX(0); opacity: 0.5; }
+            100% { transform: translateX(40px); opacity: 0; }
         }
 
         @keyframes sparkleRight {
-            0% { transform: translateX(0); opacity: 0; }
-            50% { opacity: 0.25; }
-            100% { transform: translateX(-60px); opacity: 0; }
+            0% { transform: translateX(0); opacity: 0.5; }
+            100% { transform: translateX(-40px); opacity: 0; }
         }
 
         @keyframes sparkleTop {
-            0% { transform: translateY(0); opacity: 0; }
-            50% { opacity: 0.25; }
-            100% { transform: translateY(60px); opacity: 0; }
+            0% { transform: translateY(0); opacity: 0.5; }
+            100% { transform: translateY(40px); opacity: 0; }
         }
 
         @keyframes sparkleBottom {
-            0% { transform: translateY(0); opacity: 0; }
-            50% { opacity: 0.25; }
-            100% { transform: translateY(-60px); opacity: 0; }
+            0% { transform: translateY(0); opacity: 0.5; }
+            100% { transform: translateY(-40px); opacity: 0; }
         }
         `;
+
         document.head.appendChild(style);
 
         // =========================
-        // ✨ GERAR SPARKLES
+        // 💫 SPAWN
         // =========================
-        for (let i = 0; i < 80; i++) {
+        function spawn() {
+
             const s = document.createElement("div");
-            s.className = "sparkle";
+
+            // 💗 coração vazado pequeno
+            s.innerText = "♡";
+            s.style.position = "absolute";
+            s.style.fontSize = "8px";
+            s.style.color = "white";
+            s.style.opacity = "0.6";
+            s.style.textShadow = "0 0 6px rgba(255,255,255,0.8)";
+            s.style.pointerEvents = "none";
 
             const type = Math.floor(Math.random() * 4);
-            const duration = 2 + Math.random() * 3;
+            const duration = (Math.random() * 2 + 2).toFixed(2);
 
             if (type === 0) {
                 // esquerda
@@ -204,7 +182,15 @@ jQuery(async () => {
             s.style.animationDelay = (Math.random() * 3) + "s";
 
             container.appendChild(s);
+
+            // remove depois de um tempo pra não acumular
+            setTimeout(() => s.remove(), duration * 1000);
         }
+
+        // =========================
+        // ⏱ LOOP
+        // =========================
+        setInterval(spawn, 150);
 
         console.log("Coquette Frame 360° ✨ carregado");
 
