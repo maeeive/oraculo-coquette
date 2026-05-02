@@ -81,132 +81,101 @@ jQuery(async () => {
 
     console.log("Coquette Frame iniciando ✨");
 
-    if (document.getElementById("coquette-frame")) return;
+    try {
 
-    await new Promise(r => setTimeout(r, 1000));
+        if (document.getElementById("coquette-frame")) return;
 
-    // =========================
-    // 💗 FRAME
-    // =========================
-    const frame = document.createElement("div");
-    frame.id = "coquette-frame";
+        await new Promise(r => setTimeout(r, 1000));
 
-    frame.style.position = "fixed";
-    frame.style.top = "0";
-    frame.style.left = "0";
-    frame.style.width = "100vw";
-    frame.style.height = "calc(100vh - 10px)";
-    frame.style.pointerEvents = "none";
-    frame.style.zIndex = "9995";
+        // =========================
+        // 💗 FRAME
+        // =========================
+        const frame = document.createElement("div");
+        frame.id = "coquette-frame";
 
-    frame.style.boxShadow = `
-        inset 0 0 0 5px rgba(255,182,193,0.9),
-        inset 0 0 30px rgba(255,182,193,0.25)
-    `;
+        frame.style.position = "fixed";
+        frame.style.top = "0";
+        frame.style.left = "0";
+        frame.style.width = "100vw";
+        frame.style.height = "calc(100vh - 10px)";
+        frame.style.pointerEvents = "none";
+        frame.style.zIndex = "9995";
 
-    document.body.appendChild(frame);
+        frame.style.boxShadow =
+            "inset 0 0 0 5px rgba(255,182,193,0.9), inset 0 0 30px rgba(255,182,193,0.25)";
 
-    // =========================
-    // ✨ SPARKLES CONTAINER
-    // =========================
-    const sparkleContainer = document.createElement("div");
-    sparkleContainer.id = "coquette-sparkles";
+        document.body.appendChild(frame);
 
-    sparkleContainer.style.position = "fixed";
-    sparkleContainer.style.top = "0";
-    sparkleContainer.style.left = "0";
-    sparkleContainer.style.width = "100vw";
-    sparkleContainer.style.height = "100vh";
-    sparkleContainer.style.pointerEvents = "none";
-    sparkleContainer.style.zIndex = "9996";
+        // =========================
+        // ✨ SPARKLES
+        // =========================
+        const container = document.createElement("div");
+        container.id = "coquette-sparkles";
 
-    document.body.appendChild(sparkleContainer);
+        container.style.position = "fixed";
+        container.style.top = "0";
+        container.style.left = "0";
+        container.style.width = "100vw";
+        container.style.height = "100vh";
+        container.style.pointerEvents = "none";
+        container.style.zIndex = "9996";
 
-    // =========================
-    // 💄 STYLE
-    // =========================
-    const style = document.createElement("style");
+        document.body.appendChild(container);
 
-    style.innerHTML = `
-    .sparkle {
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background: white;
-        border-radius: 50%;
-        opacity: 0.2;
-        filter: blur(1px);
+        // CSS separado (sem template quebrando)
+        const style = document.createElement("style");
+        style.textContent = `
+        .sparkle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(1px);
+        }
+
+        @keyframes sparkleLeft {
+            0% { transform: translateX(0); opacity: 0; }
+            50% { opacity: 0.25; }
+            100% { transform: translateX(60px); opacity: 0; }
+        }
+
+        @keyframes sparkleRight {
+            0% { transform: translateX(0); opacity: 0; }
+            50% { opacity: 0.25; }
+            100% { transform: translateX(-60px); opacity: 0; }
+        }
+        `;
+        document.head.appendChild(style);
+
+        // gerar partículas
+        for (let i = 0; i < 25; i++) {
+            const s = document.createElement("div");
+            s.className = "sparkle";
+
+            const isLeft = Math.random() > 0.5;
+            s.style.top = Math.random() * 100 + "%";
+
+            const duration = 2 + Math.random() * 3;
+
+            if (isLeft) {
+                s.style.left = "0px";
+                s.style.animation = "sparkleLeft " + duration + "s linear infinite";
+            } else {
+                s.style.right = "0px";
+                s.style.animation = "sparkleRight " + duration + "s linear infinite";
+            }
+
+            s.style.animationDelay = (Math.random() * 3) + "s";
+
+            container.appendChild(s);
+        }
+
+        console.log("Coquette Frame carregado 💗");
+
+    } catch (e) {
+        console.error("Erro na extensão:", e);
     }
-
-    @keyframes sparkleLeft {
-        from {
-            transform: translateX(0);
-            opacity: 0;
-        }
-        50% {
-            opacity: 0.25;
-        }
-        to {
-            transform: translateX(60px);
-            opacity: 0;
-        }
-    }
-
-    @keyframes sparkleRight {
-        from {
-            transform: translateX(0);
-            opacity: 0;
-        }
-        50% {
-            opacity: 0.25;
-        }
-        to {
-            transform: translateX(-60px);
-            opacity: 0;
-        }
-    }
-    `;
-
-    document.head.appendChild(style);
-
-    // =========================
-    // ✨ GERAR SPARKLES
-    // =========================
-    for (let i = 0; i < 30; i++) {
-        const s = document.createElement("div");
-        s.className = "sparkle";
-
-        const isLeft = Math.random() > 0.5;
-
-        // só perto das bordas (mais aesthetic)
-        const vertical = Math.random() * 100;
-        s.style.top = vertical + "%";
-
-        if (isLeft) {
-            s.style.left = "0px";
-            s.style.animation = `sparkleLeft ${2 + Math.random() * 3}s linear infinite`;
-        } else {
-            s.style.right = "0px";
-            s.style.animation = `sparkleRight ${2 + Math.random() * 3}s linear infinite`;
-        }
-
-        s.style.animationDelay = (Math.random() * 3) + "s";
-
-        sparkleContainer.appendChild(s);
-    }
-
-    console.log("Coquette Frame + Sparkles ✨ carregado");
-
-});
-        s.style.top = Math.random() * 100 + "%";
-        s.style[side] = "0px";
-
-        s.style.animationDuration = (2 + Math.random() * 3) + "s";
-        s.style.animationDelay = (Math.random() * 3) + "s";
-
-        sparkleContainer.appendChild(s);
-    }
-
-    console.log("Coquette Frame + Sparkles ✨ carregado");
 
 });
