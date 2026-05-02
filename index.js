@@ -218,36 +218,69 @@ document.addEventListener("touchstart", function(e) {
 
 })
 
-(function () {
+jQuery(async () => {
 
-    if (document.getElementById("coquette-curtain")) return;
+    console.log("Coquette Glow 💗");
 
-    const curtain = document.createElement("div");
-    curtain.id = "coquette-curtain";
+    try {
 
-    curtain.style.position = "fixed";
-    curtain.style.top = "0";
-    curtain.style.left = "0";
-    curtain.style.width = "100vw";
-    curtain.style.height = "100vh";
-    curtain.style.zIndex = "9998";
-    curtain.style.pointerEvents = "none";
+        if (document.getElementById("coquette-glow")) return;
 
-    // gradiente mais aesthetic
-    curtain.style.background = "linear-gradient(90deg, rgba(255,182,193,0.6), rgba(255,192,203,0.4))";
+        await new Promise(r => setTimeout(r, 800));
 
-    curtain.style.transition = "all 1s ease";
+        // =========================
+        // 💗 CONTAINER
+        // =========================
+        const glow = document.createElement("div");
+        glow.id = "coquette-glow";
 
-    document.body.appendChild(curtain);
+        glow.style.position = "fixed";
+        glow.style.top = "0";
+        glow.style.left = "0";
+        glow.style.width = "100vw";
+        glow.style.height = "100vh";
+        glow.style.pointerEvents = "none";
+        glow.style.zIndex = "9992";
 
-    // animação abrindo no meio
-    requestAnimationFrame(() => {
-        curtain.style.clipPath = "inset(0 50% 0 50%)";
-        curtain.style.opacity = "0";
-    });
+        document.body.appendChild(glow);
 
-    setTimeout(() => {
-        curtain.remove();
-    }, 1200);
+        // =========================
+        // ✨ STYLE
+        // =========================
+        const style = document.createElement("style");
 
-})();
+        style.innerHTML = `
+        @keyframes coquetteBreath {
+            0% {
+                box-shadow:
+                inset 0 0 40px rgba(255,182,193,0.15),
+                inset 0 0 80px rgba(255,182,193,0.1);
+            }
+
+            50% {
+                box-shadow:
+                inset 0 0 80px rgba(255,182,193,0.25),
+                inset 0 0 120px rgba(255,182,193,0.15);
+            }
+
+            100% {
+                box-shadow:
+                inset 0 0 40px rgba(255,182,193,0.15),
+                inset 0 0 80px rgba(255,182,193,0.1);
+            }
+        }
+
+        #coquette-glow {
+            animation: coquetteBreath 6s ease-in-out infinite;
+        }
+        `;
+
+        document.head.appendChild(style);
+
+        console.log("Glow ativo 💗");
+
+    } catch (e) {
+        console.error(e);
+    }
+
+});
