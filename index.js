@@ -176,48 +176,6 @@ jQuery(async () => {
 
 })
 
-document.addEventListener("touchstart", function(e) {
-
-    const t = e.touches[0];
-    const x = t.clientX;
-    const y = t.clientY;
-
-    for (let i = 0; i < 6; i++) {
-
-        const s = document.createElement("div");
-
-        s.style.position = "fixed";
-        s.style.left = x + "px";
-        s.style.top = y + "px";
-        s.style.width = "2px";
-        s.style.height = "2px";
-        s.style.background = "rgba(255,255,255,0.7)";
-        s.style.borderRadius = "50%";
-        s.style.pointerEvents = "none";
-        s.style.zIndex = "999999";
-        s.style.filter = "blur(0.5px)";
-
-        const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * 30;
-
-        const moveX = Math.cos(angle) * dist;
-        const moveY = Math.sin(angle) * dist;
-
-        s.animate([
-            { transform: "translate(0,0)", opacity: 0.7 },
-            { transform: `translate(${moveX}px, ${moveY}px)`, opacity: 0 }
-        ], {
-            duration: 500,
-            easing: "ease-out"
-        });
-
-        document.body.appendChild(s);
-
-        setTimeout(() => s.remove(), 500);
-    }
-
-})
-
 jQuery(async () => {
 
     console.log("Coquette Glow 💗");
