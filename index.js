@@ -85,29 +85,24 @@ jQuery(async () => {
 
     await new Promise(r => setTimeout(r, 1000));
 
-    // =========================
-    // 💗 FRAME
-    // =========================
     const frame = document.createElement("div");
     frame.id = "coquette-frame";
 
     frame.style.position = "fixed";
-    frame.style.inset = "6px"; // mantém dentro da tela
+    frame.style.top = "0";
+    frame.style.left = "0";
+    frame.style.width = "100vw";
+    frame.style.height = "calc(100vh - 10px)"; // 🔥 FIX AQUI
     frame.style.pointerEvents = "none";
     frame.style.zIndex = "9995";
 
-    // 🔥 borda REAL (não buga)
-    frame.style.border = "5px solid rgba(255,182,193,0.9)";
-    frame.style.borderRadius = "18px";
-
-    // glow leve separado (não depende da borda)
-    frame.style.boxShadow = "0 0 20px rgba(255,182,193,0.3)";
+    frame.style.boxShadow = `
+        inset 0 0 0 6px rgba(255,182,193,0.8),
+        inset 0 0 40px rgba(255,182,193,0.4)
+    `;
 
     document.body.appendChild(frame);
 
-    // =========================
-    // 🎀 LACINHOS
-    // =========================
     const corners = [
         ["top","left"],
         ["top","right"],
