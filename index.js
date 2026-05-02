@@ -77,7 +77,7 @@ setTimeout(() => {
 
 }, 500);
 
-setTimeout(() => {
+{
 
     if (document.getElementById("coquette-frame")) return;
 
