@@ -214,61 +214,44 @@ jQuery(async () => {
 
 })
 
-let lastSpawn = 0;
+document.addEventListener("touchstart", function(e) {
 
-function spawnHeart(x, y) {
-
-    const h = document.createElement("div");
-
-    h.innerText = "❤";
-    h.style.position = "fixed";
-    h.style.left = x + "px";
-    h.style.top = y + "px";
-    h.style.fontSize = "10px";
-    h.style.color = "rgba(255,182,193,0.9)";
-    h.style.pointerEvents = "none";
-    h.style.zIndex = "999999";
-    h.style.textShadow = "0 0 6px pink";
-
-    const angle = (Math.random() - 0.5) * 1.2;
-    const dist = Math.random() * 25;
-
-    const moveX = Math.sin(angle) * dist;
-    const moveY = -Math.abs(dist);
-
-    h.animate([
-        { transform: "translate(0,0)", opacity: 0.9 },
-        { transform: `translate(${moveX}px, ${moveY}px)`, opacity: 0 }
-    ], {
-        duration: 700,
-        easing: "ease-out"
-    });
-
-    document.body.appendChild(h);
-
-    setTimeout(() => h.remove(), 700);
-}
-
-// 💗 toque inicial (explosão leve)
-document.addEventListener("touchstart", (e) => {
     const t = e.touches[0];
+    const x = t.clientX;
+    const y = t.clientY;
 
-    for (let i = 0; i < 5; i++) {
-        spawnHeart(t.clientX, t.clientY);
+    for (let i = 0; i < 6; i++) {
+
+        const s = document.createElement("div");
+
+        s.style.position = "fixed";
+        s.style.left = x + "px";
+        s.style.top = y + "px";
+        s.style.width = "2px";
+        s.style.height = "2px";
+        s.style.background = "rgba(255,255,255,0.7)";
+        s.style.borderRadius = "50%";
+        s.style.pointerEvents = "none";
+        s.style.zIndex = "999999";
+        s.style.filter = "blur(0.5px)";
+
+        const angle = Math.random() * Math.PI * 2;
+        const dist = Math.random() * 30;
+
+        const moveX = Math.cos(angle) * dist;
+        const moveY = Math.sin(angle) * dist;
+
+        s.animate([
+            { transform: "translate(0,0)", opacity: 0.7 },
+            { transform: `translate(${moveX}px, ${moveY}px)`, opacity: 0 }
+        ], {
+            duration: 500,
+            easing: "ease-out"
+        });
+
+        document.body.appendChild(s);
+
+        setTimeout(() => s.remove(), 500);
     }
-});
-
-// ✨ cauda de fada (segue o dedo)
-document.addEventListener("touchmove", (e) => {
-
-    const now = Date.now();
-
-    // controla performance (não spawnar demais)
-    if (now - lastSpawn < 40) return;
-    lastSpawn = now;
-
-    const t = e.touches[0];
-
-    spawnHeart(t.clientX, t.clientY);
 
 });
