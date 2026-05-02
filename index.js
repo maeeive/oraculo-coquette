@@ -47,7 +47,7 @@ setTimeout(() => {
 
     #coquette-header {
         position: fixed;
-        top: 70px; /* abaixo do top bar */
+        top: 100px; /* abaixo do top bar */
         left: 50%;
         transform: translateX(-50%);
         z-index: 9999;
@@ -57,20 +57,19 @@ setTimeout(() => {
 
     #coquette-title {
         font-family: 'Ballet', cursive;
-        font-size: 32px;
-        color: #ffb6c1;
+        font-size: 34px;
+        color: #FFB2C4;
         text-shadow:
-            0 0 12px rgba(255,182,193,0.9),
-            0 0 4px #fff;
+            0 0 6px rgba(212, 76, 140, 0.8);
     }
 
     #coquette-sub {
         font-family: 'Great Vibes', cursive;
-        font-size: 16px;
-        color: #ffb6c1;
+        font-size: 19px;
+        color: #FFB2C4;
         opacity: 0.9;
         letter-spacing: 2px;
-        text-shadow: 0 0 6px rgba(255,182,193,0.6);
+        text-shadow: 0 0 6px rgba(212, 76, 140, 0.8);
         margin-top: -5px;
     }
 
