@@ -166,7 +166,7 @@ jQuery(async () => {
         // =========================
         // ✨ GERAR SPARKLES
         // =========================
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < 80; i++) {
             const s = document.createElement("div");
             s.className = "sparkle";
 
