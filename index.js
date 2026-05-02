@@ -287,40 +287,52 @@ jQuery(async () => {
 
 jQuery(async () => {
 
-    console.log("Typing Reveal 💗");
+    console.log("Hybrid Animation 💗");
 
     try {
 
-        if (document.getElementById("coquette-typing")) return;
+        if (document.getElementById("coquette-hybrid")) return;
 
         await new Promise(r => setTimeout(r, 800));
 
         const style = document.createElement("style");
-        style.id = "coquette-typing";
+        style.id = "coquette-hybrid";
 
         style.innerHTML = `
 
-        @keyframes typingReveal {
-            from {
-                clip-path: inset(0 100% 0 0);
+        @keyframes coquetteHybrid {
+            0% {
                 opacity: 0;
+                transform: translateY(20px) scale(0.98);
+                filter: blur(4px);
+                clip-path: inset(0 100% 0 0);
             }
-            to {
-                clip-path: inset(0 0% 0 0);
+
+            60% {
                 opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(1px);
+                clip-path: inset(0 20% 0 0);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+                clip-path: inset(0 0 0 0);
             }
         }
 
         /* 💬 aplica só no texto */
         .mes_text {
-            animation: typingReveal 1.2s ease-out;
+            animation: coquetteHybrid 0.9s ease-out;
         }
 
         `;
 
         document.head.appendChild(style);
 
-        console.log("Typing reveal ativo ✨");
+        console.log("Hybrid ativo ✨");
 
     } catch (e) {
         console.error(e);
