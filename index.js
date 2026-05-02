@@ -254,4 +254,29 @@ document.addEventListener("touchstart", function(e) {
         setTimeout(() => s.remove(), 500);
     }
 
-});
+})
+
+let lastCount = 0;
+
+setInterval(() => {
+
+    const mensagens = document.querySelectorAll(".mes");
+
+    if (!mensagens.length) return;
+
+    if (mensagens.length > lastCount) {
+
+        const nova = mensagens[mensagens.length - 1];
+
+        nova.style.transition = "box-shadow 0.6s ease";
+
+        nova.style.boxShadow = "0 0 18px rgba(255,182,193,0.6)";
+
+        setTimeout(() => {
+            nova.style.boxShadow = "none";
+        }, 1200);
+
+        lastCount = mensagens.length;
+    }
+
+}, 600);
