@@ -109,30 +109,95 @@ jQuery(async () => {
 
         document.body.appendChild(frame);
 
-        // 🎀 CANTOS COQUETTE
-const corners = [
-    ["top","left"],
-    ["top","right"],
-    ["bottom","left"],
-    ["bottom","right"]
-];
+        // 🎀 CANTOS COQUETTE (VERSÃO BONITA)
+const styleCorners = document.createElement("style");
 
-corners.forEach(([v,h]) => {
+styleCorners.innerHTML = `
+
+.coquette-corner {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    z-index: 9996;
+    pointer-events: none;
+}
+
+.coquette-corner::before,
+.coquette-corner::after {
+    content: "";
+    position: absolute;
+    border: 1.5px solid rgba(255,182,193,0.7);
+    border-radius: 20px;
+}
+
+/* top left */
+.coq-tl { top: 6px; left: 6px; }
+.coq-tl::before {
+    width: 30px;
+    height: 30px;
+    border-right: none;
+    border-bottom: none;
+}
+.coq-tl::after {
+    width: 15px;
+    height: 15px;
+    top: 10px;
+    left: 10px;
+}
+
+/* top right */
+.coq-tr { top: 6px; right: 6px; }
+.coq-tr::before {
+    width: 30px;
+    height: 30px;
+    border-left: none;
+    border-bottom: none;
+}
+.coq-tr::after {
+    width: 15px;
+    height: 15px;
+    top: 10px;
+    right: 10px;
+}
+
+/* bottom left */
+.coq-bl { bottom: 6px; left: 6px; }
+.coq-bl::before {
+    width: 30px;
+    height: 30px;
+    border-right: none;
+    border-top: none;
+}
+.coq-bl::after {
+    width: 15px;
+    height: 15px;
+    bottom: 10px;
+    left: 10px;
+}
+
+/* bottom right */
+.coq-br { bottom: 6px; right: 6px; }
+.coq-br::before {
+    width: 30px;
+    height: 30px;
+    border-left: none;
+    border-top: none;
+}
+.coq-br::after {
+    width: 15px;
+    height: 15px;
+    bottom: 10px;
+    right: 10px;
+}
+
+`;
+
+document.head.appendChild(styleCorners);
+
+// cria os 4 cantos
+["tl","tr","bl","br"].forEach(pos => {
     const c = document.createElement("div");
-
-    c.innerText = "୨୧";
-    c.style.position = "fixed";
-    c.style[v] = "2px";
-    c.style[h] = "6px";
-
-    c.style.fontSize = "14px";
-    c.style.color = "#ffb6c1";
-    c.style.opacity = "0.8";
-
-    c.style.textShadow = "0 0 6px rgba(255,182,193,0.8)";
-    c.style.zIndex = "9996";
-    c.style.pointerEvents = "none";
-
+    c.className = "coquette-corner coq-" + pos;
     document.body.appendChild(c);
 });
 
@@ -325,39 +390,57 @@ jQuery(async () => {
 
 });
 
-// ✦ DECORAÇÃO ABAIXO DO AVATAR
+// ✦ LINHA ESTRELA + LUA
 setTimeout(() => {
 
-    const avatar = document.querySelector("img");
+    const avatar = document.querySelector(".mes_avatar img");
 
-    if (!avatar) return;
+    if (!avatar) {
+        console.log("avatar não encontrado");
+        return;
+    }
 
     const deco = document.createElement("div");
 
     deco.innerHTML = `
         ✦
-        <div style="font-size:10px;opacity:0.6;">|</div>
-        <div style="font-size:10px;opacity:0.6;">|</div>
+        <div class="line"></div>
+        <div class="line small"></div>
         ☾
-        <div style="font-size:10px;opacity:0.6;">|</div>
+        <div class="line"></div>
         ✧
     `;
 
     deco.style.position = "absolute";
     deco.style.left = "50%";
     deco.style.transform = "translateX(-50%)";
-    deco.style.top = "110%";
+    deco.style.top = "100%";
 
     deco.style.display = "flex";
     deco.style.flexDirection = "column";
     deco.style.alignItems = "center";
-    deco.style.gap = "2px";
+    deco.style.gap = "3px";
 
     deco.style.color = "#ffd6e0";
     deco.style.fontSize = "12px";
     deco.style.textShadow = "0 0 6px rgba(255,182,193,0.8)";
 
+    // estilo das linhas
+    const style = document.createElement("style");
+    style.innerHTML = `
+    .line {
+        width: 1px;
+        height: 10px;
+        background: rgba(255,182,193,0.5);
+    }
+    .line.small {
+        height: 6px;
+        opacity: 0.6;
+    }
+    `;
+    document.head.appendChild(style);
+
     avatar.parentElement.style.position = "relative";
     avatar.parentElement.appendChild(deco);
 
-}, 1200);
+}, 1500);
