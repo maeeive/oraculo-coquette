@@ -328,7 +328,7 @@ jQuery(async () => {
 // ✦ DECORAÇÃO ABAIXO DO AVATAR
 setTimeout(() => {
 
-    const avatar = document.querySelector(".avatar, .avatar-container img");
+    const avatar = document.querySelector("img");
 
     if (!avatar) return;
 
