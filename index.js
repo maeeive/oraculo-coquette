@@ -109,6 +109,25 @@ jQuery(async () => {
 
         document.body.appendChild(frame);
 
+        // 🖼️ BORDA PNG OVERLAY
+const overlay = document.createElement("div");
+
+overlay.style.position = "absolute";
+overlay.style.inset = "0";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "9997"; // acima de tudo
+
+overlay.style.backgroundImage = "url('https://file.garden/abCiFnQil12ZnGUC/file_0000000085a8720e917b8d77403a0c30.png')";
+overlay.style.backgroundSize = "100% 100%";
+overlay.style.backgroundRepeat = "no-repeat";
+overlay.style.backgroundPosition = "center";
+
+// suaviza pra misturar com o rosa
+overlay.style.opacity = "0.9";
+overlay.style.mixBlendMode = "screen";
+
+frame.appendChild(overlay);
+
         // 🎀 CANTOS COQUETTE (VERSÃO BONITA)
 const styleCorners = document.createElement("style");
 
