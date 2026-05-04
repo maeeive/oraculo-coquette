@@ -83,7 +83,6 @@ jQuery(async () => {
 
         console.log("Coquette FX iniciando ✦");
 
-        // evita duplicar
         if (document.getElementById("coquette-frame")) return;
 
         await new Promise(r => setTimeout(r, 1000));
@@ -102,104 +101,84 @@ jQuery(async () => {
         frame.style.pointerEvents = "none";
         frame.style.zIndex = "9995";
 
-        frame.style.boxShadow = `
-            inset 0 0 0 4px rgba(255,182,193,0.7),
-            inset 0 0 25px rgba(255,182,193,0.3)
-        `;
+        frame.style.backdropFilter = "blur(6px)";
+        frame.style.webkitBackdropFilter = "blur(6px)";
+        frame.style.background = "rgba(255,255,255,0.03)";
+
+        frame.style.animation = "coquetteGlow 6s ease-in-out infinite";
 
         document.body.appendChild(frame);
 
-        // 🎀 CANTOS COQUETTE (VERSÃO BONITA)
-const styleCorners = document.createElement("style");
+        // =========================
+        // ✨ REFLEXO
+        // =========================
+        const glass = document.createElement("div");
 
-styleCorners.innerHTML = `
+        glass.style.position = "absolute";
+        glass.style.inset = "0";
+        glass.style.pointerEvents = "none";
 
-.coquette-corner {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    z-index: 9996;
-    pointer-events: none;
-}
+        glass.style.background = `
+            linear-gradient(
+                120deg,
+                rgba(255,255,255,0.15) 0%,
+                transparent 30%,
+                transparent 70%,
+                rgba(255,255,255,0.1) 100%
+            )
+        `;
 
-.coquette-corner::before,
-.coquette-corner::after {
-    content: "";
-    position: absolute;
-    border: 1.5px solid rgba(255,182,193,0.7);
-    border-radius: 20px;
-}
+        glass.style.mixBlendMode = "screen";
+        glass.style.opacity = "0.4";
 
-/* top left */
-.coq-tl { top: 6px; left: 6px; }
-.coq-tl::before {
-    width: 30px;
-    height: 30px;
-    border-right: none;
-    border-bottom: none;
-}
-.coq-tl::after {
-    width: 15px;
-    height: 15px;
-    top: 10px;
-    left: 10px;
-}
+        frame.appendChild(glass);
 
-/* top right */
-.coq-tr { top: 6px; right: 6px; }
-.coq-tr::before {
-    width: 30px;
-    height: 30px;
-    border-left: none;
-    border-bottom: none;
-}
-.coq-tr::after {
-    width: 15px;
-    height: 15px;
-    top: 10px;
-    right: 10px;
-}
+        // =========================
+        // 🎀 CANTOS COQUETTE
+        // =========================
+        const styleCorners = document.createElement("style");
 
-/* bottom left */
-.coq-bl { bottom: 6px; left: 6px; }
-.coq-bl::before {
-    width: 30px;
-    height: 30px;
-    border-right: none;
-    border-top: none;
-}
-.coq-bl::after {
-    width: 15px;
-    height: 15px;
-    bottom: 10px;
-    left: 10px;
-}
+        styleCorners.innerHTML = `
+        .coquette-corner {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            z-index: 9996;
+            pointer-events: none;
+        }
 
-/* bottom right */
-.coq-br { bottom: 6px; right: 6px; }
-.coq-br::before {
-    width: 30px;
-    height: 30px;
-    border-left: none;
-    border-top: none;
-}
-.coq-br::after {
-    width: 15px;
-    height: 15px;
-    bottom: 10px;
-    right: 10px;
-}
+        .coquette-corner::before,
+        .coquette-corner::after {
+            content: "";
+            position: absolute;
+            border: 1.5px solid rgba(255,182,193,0.7);
+            border-radius: 20px;
+        }
 
-`;
+        .coq-tl { top: 6px; left: 6px; }
+        .coq-tl::before { width: 30px; height: 30px; border-right: none; border-bottom: none; }
+        .coq-tl::after { width: 15px; height: 15px; top: 10px; left: 10px; }
 
-document.head.appendChild(styleCorners);
+        .coq-tr { top: 6px; right: 6px; }
+        .coq-tr::before { width: 30px; height: 30px; border-left: none; border-bottom: none; }
+        .coq-tr::after { width: 15px; height: 15px; top: 10px; right: 10px; }
 
-// cria os 4 cantos
-["tl","tr","bl","br"].forEach(pos => {
-    const c = document.createElement("div");
-    c.className = "coquette-corner coq-" + pos;
-    document.body.appendChild(c);
-});
+        .coq-bl { bottom: 6px; left: 6px; }
+        .coq-bl::before { width: 30px; height: 30px; border-right: none; border-top: none; }
+        .coq-bl::after { width: 15px; height: 15px; bottom: 10px; left: 10px; }
+
+        .coq-br { bottom: 6px; right: 6px; }
+        .coq-br::before { width: 30px; height: 30px; border-left: none; border-top: none; }
+        .coq-br::after { width: 15px; height: 15px; bottom: 10px; right: 10px; }
+        `;
+
+        document.head.appendChild(styleCorners);
+
+        ["tl","tr","bl","br"].forEach(pos => {
+            const c = document.createElement("div");
+            c.className = "coquette-corner coq-" + pos;
+            document.body.appendChild(c);
+        });
 
         // =========================
         // ✦ FAIRY DUST
@@ -213,7 +192,7 @@ document.head.appendChild(styleCorners);
         dust.style.width = "100vw";
         dust.style.height = "100vh";
         dust.style.pointerEvents = "none";
-        dust.style.zIndex = "9994"; // abaixo da borda
+        dust.style.zIndex = "9994";
 
         document.body.appendChild(dust);
 
@@ -245,22 +224,46 @@ document.head.appendChild(styleCorners);
         }
 
         // =========================
-        // 🎞️ ANIMAÇÃO
+        // 🎞️ ANIMAÇÕES
         // =========================
         const style = document.createElement("style");
         style.innerHTML = `
         
         @keyframes fall {
-            0% { transform: translateY(-10px) translateX(0); }
-            50% { transform: translateY(50vh) translateX(8px); }
-            100% { transform: translateY(110vh) translateX(-8px); }
+            0% { transform: translateY(-10px); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(110vh); opacity: 0; }
         }
 
+        @keyframes coquetteGlow {
+            0% {
+                box-shadow:
+                    inset 0 0 0 3px rgba(255,182,193,0.5),
+                    inset 0 0 10px rgba(255,182,193,0.2),
+                    0 0 15px rgba(255,182,193,0.25),
+                    0 0 30px rgba(255,182,193,0.15);
+            }
+            50% {
+                box-shadow:
+                    inset 0 0 0 3px rgba(255,182,193,0.8),
+                    inset 0 0 20px rgba(255,182,193,0.4),
+                    0 0 30px rgba(255,182,193,0.45),
+                    0 0 60px rgba(255,182,193,0.3);
+            }
+            100% {
+                box-shadow:
+                    inset 0 0 0 3px rgba(255,182,193,0.5),
+                    inset 0 0 10px rgba(255,182,193,0.2),
+                    0 0 15px rgba(255,182,193,0.25),
+                    0 0 30px rgba(255,182,193,0.15);
+            }
+        }
         `;
 
         document.head.appendChild(style);
 
-        console.log("Coquette FX carregado 💗");
+        console.log("Coquette FX completo 💗");
 
     } catch (e) {
         console.error("Erro no FX:", e);
