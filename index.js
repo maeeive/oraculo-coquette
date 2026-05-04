@@ -126,6 +126,33 @@ jQuery(async () => {
         container.appendChild(snow);
     }
 
+        try {
+
+        if (document.getElementById("coquette-frame")) return;
+
+        await new Promise(r => setTimeout(r, 1000));
+
+        // =========================
+        // 💗 CONTAINER
+        // =========================
+        const container = document.createElement("div");
+        container.id = "coquette-frame";
+
+        container.style.position = "fixed";
+        container.style.top = "0";
+        container.style.left = "0";
+        container.style.width = "100vw";
+        container.style.height = "100vh";
+        container.style.pointerEvents = "none";
+        container.style.zIndex = "9995";
+
+        container.style.boxShadow = `
+            inset 0 0 0 4px rgba(255,182,193,0.7),
+            inset 0 0 25px rgba(255,182,193,0.3)
+        `;
+
+        document.body.appendChild(container);
+
     // animação
     const style = document.createElement("style");
     style.innerHTML = `
