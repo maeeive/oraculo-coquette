@@ -106,7 +106,7 @@ jQuery(async () => {
     for (let i = 0; i < SNOW_COUNT; i++) {
         const snow = document.createElement("div");
 
-        snow.innerText = "❄️";
+        snow.innerText = "✦";
 
         const size = Math.random() * 6 + 8; // pequeno e delicado
         const duration = Math.random() * 10 + 10;
