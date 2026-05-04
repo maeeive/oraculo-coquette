@@ -118,7 +118,7 @@ overlay.style.pointerEvents = "none";
 overlay.style.zIndex = "9997"; // acima de tudo
 
 overlay.style.backgroundImage = "url('https://file.garden/abCiFnQil12ZnGUC/file_0000000085a8720e917b8d77403a0c30.png')";
-overlay.style.backgroundSize = "100% 100%";
+overlay.style.backgroundSize = "cover";
 overlay.style.backgroundRepeat = "no-repeat";
 overlay.style.backgroundPosition = "center";
 
