@@ -108,8 +108,8 @@ jQuery(async () => {
         `;
 
         document.body.appendChild(frame);
-
-// 🖼️ BORDA PNG PERFEITA (SEM DISTORÇÃO)
+        
+// 🖼️ BORDA PNG (SEM DISTORÇÃO REAL)
 const overlay = document.createElement("div");
 
 overlay.style.position = "absolute";
@@ -117,12 +117,19 @@ overlay.style.inset = "0";
 overlay.style.pointerEvents = "none";
 overlay.style.zIndex = "9997";
 
-// transforma imagem em moldura real
-overlay.style.border = "20px solid transparent";
-overlay.style.borderImage = "url('https://file.garden/abCiFnQil12ZnGUC/file_0000000085a8720e917b8d77403a0c30.png') 30 stretch";
+overlay.style.backgroundImage = "url('https://file.garden/abCiFnQil12ZnGUC/file_0000000085a8720e917b8d77403a0c30.png')";
+overlay.style.backgroundRepeat = "no-repeat";
+overlay.style.backgroundPosition = "center";
+
+// ⚡ aqui é o segredo
+overlay.style.backgroundSize = "cover";
+
+// evita ficar muito pesado/estourado
+overlay.style.opacity = "0.85";
+overlay.style.mixBlendMode = "normal";
 
 frame.appendChild(overlay);
-
+        
         // 🎀 CANTOS COQUETTE (VERSÃO BONITA)
 const styleCorners = document.createElement("style");
 
