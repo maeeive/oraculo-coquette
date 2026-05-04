@@ -115,7 +115,7 @@ const overlay = document.createElement("div");
 overlay.style.position = "absolute";
 
 // sobe mais pra cima
-overlay.style.top = "-20px";
+overlay.style.top = "-19px";
 overlay.style.left = "50%";
 overlay.style.transform = "translateX(-50%)";
 
@@ -123,7 +123,7 @@ overlay.style.transform = "translateX(-50%)";
 overlay.style.width = "110vw";
 
 // altura só metade da tela
-overlay.style.height = "40vh";
+overlay.style.height = "49vh";
 
 overlay.style.pointerEvents = "none";
 overlay.style.zIndex = "9997";
