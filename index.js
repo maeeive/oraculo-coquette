@@ -77,103 +77,102 @@ setTimeout(() => {
 
 }, 500);
 
-
 jQuery(async () => {
 
-    console.log("Snow effect iniciando ❄️");
+    try {
 
-    // evita duplicar
-    if (document.getElementById("coquette-snow")) return;
+        console.log("Coquette FX iniciando ✦");
 
-    await new Promise(r => setTimeout(r, 800));
-
-    const container = document.createElement("div");
-    container.id = "coquette-snow";
-
-    container.style.position = "fixed";
-    container.style.top = "0";
-    container.style.left = "0";
-    container.style.width = "100vw";
-    container.style.height = "100vh";
-    container.style.pointerEvents = "none";
-    container.style.zIndex = "9994"; // abaixo do header
-
-    document.body.appendChild(container);
-
-    // quantidade de neve (ajusta aqui)
-    const SNOW_COUNT = 25;
-
-    for (let i = 0; i < SNOW_COUNT; i++) {
-        const snow = document.createElement("div");
-
-        snow.innerText = "✦";
-
-        const size = Math.random() * 6 + 8; // pequeno e delicado
-        const duration = Math.random() * 10 + 10;
-
-        snow.style.position = "absolute";
-        snow.style.top = "-10px";
-        snow.style.left = Math.random() * 100 + "%";
-
-        snow.style.fontSize = size + "px";
-        snow.style.opacity = Math.random() * 0.5 + 0.2;
-
-        snow.style.animation = `snowFall ${duration}s linear infinite`;
-        snow.style.animationDelay = (Math.random() * 10) + "s";
-
-        snow.style.filter = "drop-shadow(0 0 4px rgba(255,255,255,0.6))";
-
-        container.appendChild(snow);
-    }
-
-        try {
-
+        // evita duplicar
         if (document.getElementById("coquette-frame")) return;
 
         await new Promise(r => setTimeout(r, 1000));
 
         // =========================
-        // 💗 CONTAINER
+        // 💗 FRAME (BORDA)
         // =========================
-        const container = document.createElement("div");
-        container.id = "coquette-frame";
+        const frame = document.createElement("div");
+        frame.id = "coquette-frame";
 
-        container.style.position = "fixed";
-        container.style.top = "0";
-        container.style.left = "0";
-        container.style.width = "100vw";
-        container.style.height = "100vh";
-        container.style.pointerEvents = "none";
-        container.style.zIndex = "9995";
+        frame.style.position = "fixed";
+        frame.style.top = "0";
+        frame.style.left = "0";
+        frame.style.width = "100vw";
+        frame.style.height = "100vh";
+        frame.style.pointerEvents = "none";
+        frame.style.zIndex = "9995";
 
-        container.style.boxShadow = `
+        frame.style.boxShadow = `
             inset 0 0 0 4px rgba(255,182,193,0.7),
             inset 0 0 25px rgba(255,182,193,0.3)
         `;
 
-        document.body.appendChild(container);
+        document.body.appendChild(frame);
 
-    // animação
-    const style = document.createElement("style");
-    style.innerHTML = `
-    
-    @keyframes snowFall {
-        0% {
-            transform: translateY(-10px) translateX(0);
+        // =========================
+        // ✦ FAIRY DUST
+        // =========================
+        const dust = document.createElement("div");
+        dust.id = "coquette-dust";
+
+        dust.style.position = "fixed";
+        dust.style.top = "0";
+        dust.style.left = "0";
+        dust.style.width = "100vw";
+        dust.style.height = "100vh";
+        dust.style.pointerEvents = "none";
+        dust.style.zIndex = "9994"; // abaixo da borda
+
+        document.body.appendChild(dust);
+
+        const COUNT = 25;
+
+        for (let i = 0; i < COUNT; i++) {
+
+            const spark = document.createElement("div");
+
+            spark.innerText = "✦";
+
+            const size = Math.random() * 5 + 6;
+            const duration = Math.random() * 10 + 10;
+
+            spark.style.position = "absolute";
+            spark.style.top = "-10px";
+            spark.style.left = Math.random() * 100 + "%";
+
+            spark.style.fontSize = size + "px";
+            spark.style.opacity = Math.random() * 0.4 + 0.3;
+
+            spark.style.color = "#ffffff";
+            spark.style.textShadow = "0 0 6px rgba(255,255,255,0.8)";
+
+            spark.style.animation = `fall ${duration}s linear infinite`;
+            spark.style.animationDelay = (Math.random() * 10) + "s";
+
+            dust.appendChild(spark);
         }
-        50% {
-            transform: translateY(50vh) translateX(10px);
+
+        // =========================
+        // 🎞️ ANIMAÇÃO
+        // =========================
+        const style = document.createElement("style");
+        style.innerHTML = `
+        
+        @keyframes fall {
+            0% { transform: translateY(-10px) translateX(0); }
+            50% { transform: translateY(50vh) translateX(8px); }
+            100% { transform: translateY(110vh) translateX(-8px); }
         }
-        100% {
-            transform: translateY(110vh) translateX(-10px);
-        }
+
+        `;
+
+        document.head.appendChild(style);
+
+        console.log("Coquette FX carregado 💗");
+
+    } catch (e) {
+        console.error("Erro no FX:", e);
     }
-
-    `;
-
-    document.head.appendChild(style);
-
-    console.log("Snow effect carregado ❄️");
 
 });
 
