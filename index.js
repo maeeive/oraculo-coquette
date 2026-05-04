@@ -109,24 +109,35 @@ jQuery(async () => {
 
         document.body.appendChild(frame);
         
-// 🖼️ BORDA PNG (SEM DISTORÇÃO REAL)
+// 🖼️ BORDA PNG (VERSÃO SUPERIOR)
 const overlay = document.createElement("div");
 
 overlay.style.position = "absolute";
-overlay.style.inset = "0";
+
+// sobe mais pra cima
+overlay.style.top = "-20px";
+overlay.style.left = "50%";
+overlay.style.transform = "translateX(-50%)";
+
+// largura maior que a tela (leve expansão lateral)
+overlay.style.width = "110vw";
+
+// altura só metade da tela
+overlay.style.height = "50vh";
+
 overlay.style.pointerEvents = "none";
 overlay.style.zIndex = "9997";
 
 overlay.style.backgroundImage = "url('https://file.garden/abCiFnQil12ZnGUC/file_0000000085a8720e917b8d77403a0c30.png')";
 overlay.style.backgroundRepeat = "no-repeat";
-overlay.style.backgroundPosition = "center";
+overlay.style.backgroundPosition = "top center";
 
-// ⚡ aqui é o segredo
-overlay.style.backgroundSize = "cover";
+// evita deformar
+overlay.style.backgroundSize = "contain";
 
-// evita ficar muito pesado/estourado
-overlay.style.opacity = "0.85";
-overlay.style.mixBlendMode = "normal";
+// mistura com a borda rosa
+overlay.style.opacity = "0.9";
+overlay.style.mixBlendMode = "screen";
 
 frame.appendChild(overlay);
         
