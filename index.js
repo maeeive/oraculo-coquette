@@ -123,7 +123,7 @@ overlay.style.transform = "translateX(-50%)";
 overlay.style.width = "110vw";
 
 // altura só metade da tela
-overlay.style.height = "49vh";
+overlay.style.height = "50vh";
 
 overlay.style.pointerEvents = "none";
 overlay.style.zIndex = "9997";
