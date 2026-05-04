@@ -109,6 +109,33 @@ jQuery(async () => {
 
         document.body.appendChild(frame);
 
+        // 🎀 CANTOS COQUETTE
+const corners = [
+    ["top","left"],
+    ["top","right"],
+    ["bottom","left"],
+    ["bottom","right"]
+];
+
+corners.forEach(([v,h]) => {
+    const c = document.createElement("div");
+
+    c.innerText = "୨୧";
+    c.style.position = "fixed";
+    c.style[v] = "2px";
+    c.style[h] = "6px";
+
+    c.style.fontSize = "14px";
+    c.style.color = "#ffb6c1";
+    c.style.opacity = "0.8";
+
+    c.style.textShadow = "0 0 6px rgba(255,182,193,0.8)";
+    c.style.zIndex = "9996";
+    c.style.pointerEvents = "none";
+
+    document.body.appendChild(c);
+});
+
         // =========================
         // ✦ FAIRY DUST
         // =========================
@@ -297,3 +324,40 @@ jQuery(async () => {
     }
 
 });
+
+// ✦ DECORAÇÃO ABAIXO DO AVATAR
+setTimeout(() => {
+
+    const avatar = document.querySelector(".avatar, .avatar-container img");
+
+    if (!avatar) return;
+
+    const deco = document.createElement("div");
+
+    deco.innerHTML = `
+        ✦
+        <div style="font-size:10px;opacity:0.6;">|</div>
+        <div style="font-size:10px;opacity:0.6;">|</div>
+        ☾
+        <div style="font-size:10px;opacity:0.6;">|</div>
+        ✧
+    `;
+
+    deco.style.position = "absolute";
+    deco.style.left = "50%";
+    deco.style.transform = "translateX(-50%)";
+    deco.style.top = "110%";
+
+    deco.style.display = "flex";
+    deco.style.flexDirection = "column";
+    deco.style.alignItems = "center";
+    deco.style.gap = "2px";
+
+    deco.style.color = "#ffd6e0";
+    deco.style.fontSize = "12px";
+    deco.style.textShadow = "0 0 6px rgba(255,182,193,0.8)";
+
+    avatar.parentElement.style.position = "relative";
+    avatar.parentElement.appendChild(deco);
+
+}, 1200);
