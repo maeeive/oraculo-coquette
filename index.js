@@ -23,8 +23,8 @@ setTimeout(() => {
     header.id = "coquette-header";
 
     header.innerHTML = `
-        <div id="coquette-title">🎀 My Love 🎀</div>
-        <div id="coquette-sub">♡ dreamy coquette v2 ♡</div>
+        <div id="coquette-title">☁️ My Love ☁️</div>
+        <div id="coquette-sub">♡ dreamy coquette ♡</div>
     `;
 
     document.body.appendChild(header);
@@ -77,104 +77,78 @@ setTimeout(() => {
 
 }, 500);
 
+
 jQuery(async () => {
 
-    console.log("Coquette lateral ✨");
+    console.log("Snow effect iniciando ❄️");
 
-    try {
+    // evita duplicar
+    if (document.getElementById("coquette-snow")) return;
 
-        if (document.getElementById("coquette-frame")) return;
+    await new Promise(r => setTimeout(r, 800));
 
-        await new Promise(r => setTimeout(r, 1000));
+    const container = document.createElement("div");
+    container.id = "coquette-snow";
 
-        // =========================
-        // 💗 CONTAINER
-        // =========================
-        const container = document.createElement("div");
-        container.id = "coquette-frame";
+    container.style.position = "fixed";
+    container.style.top = "0";
+    container.style.left = "0";
+    container.style.width = "100vw";
+    container.style.height = "100vh";
+    container.style.pointerEvents = "none";
+    container.style.zIndex = "9994"; // abaixo do header
 
-        container.style.position = "fixed";
-        container.style.top = "0";
-        container.style.left = "0";
-        container.style.width = "100vw";
-        container.style.height = "100vh";
-        container.style.pointerEvents = "none";
-        container.style.zIndex = "9995";
+    document.body.appendChild(container);
 
-        container.style.boxShadow = `
-            inset 0 0 0 4px rgba(255,182,193,0.7),
-            inset 0 0 25px rgba(255,182,193,0.3)
-        `;
+    // quantidade de neve (ajusta aqui)
+    const SNOW_COUNT = 25;
 
-        document.body.appendChild(container);
+    for (let i = 0; i < SNOW_COUNT; i++) {
+        const snow = document.createElement("div");
 
-        // =========================
-        // ✨ STYLE
-        // =========================
-        const style = document.createElement("style");
+        snow.innerText = "❄️";
 
-        style.innerHTML = `
-        @keyframes sparkleLeft {
-            0% { transform: translateX(0); opacity: 0.8; }
-            100% { transform: translateX(140px); opacity: 0; }
-        }
+        const size = Math.random() * 6 + 8; // pequeno e delicado
+        const duration = Math.random() * 10 + 10;
 
-        @keyframes sparkleRight {
-            0% { transform: translateX(0); opacity: 0.8; }
-            100% { transform: translateX(-140px); opacity: 0; }
-        }
-        `;
+        snow.style.position = "absolute";
+        snow.style.top = "-10px";
+        snow.style.left = Math.random() * 100 + "%";
 
-        document.head.appendChild(style);
+        snow.style.fontSize = size + "px";
+        snow.style.opacity = Math.random() * 0.5 + 0.2;
 
-        // =========================
-        // 💫 SPAWN
-        // =========================
-        function spawn() {
+        snow.style.animation = `snowFall ${duration}s linear infinite`;
+        snow.style.animationDelay = (Math.random() * 10) + "s";
 
-            const s = document.createElement("div");
+        snow.style.filter = "drop-shadow(0 0 4px rgba(255,255,255,0.6))";
 
-            s.innerText = "✦";
-            s.style.position = "absolute";
-            s.style.fontSize = "9px";
-            s.style.color = "rgba(255,255,255,0.9)";
-            s.style.opacity = "0.85";
-            s.style.textShadow = "0 0 10px rgba(255,255,255,1)";
-            s.style.pointerEvents = "none";
-
-            const type = Math.floor(Math.random() * 2); // só 0 e 1
-            const duration = (Math.random() * 2 + 2.5).toFixed(2);
-
-            if (type === 0) {
-                // esquerda → direita
-                s.style.left = "0px";
-                s.style.top = Math.random() * 100 + "%";
-                s.style.animation = "sparkleLeft " + duration + "s ease-out infinite";
-            }
-
-            if (type === 1) {
-                // direita → esquerda
-                s.style.right = "0px";
-                s.style.top = Math.random() * 100 + "%";
-                s.style.animation = "sparkleRight " + duration + "s ease-out infinite";
-            }
-
-            s.style.animationDelay = (Math.random() * 2) + "s";
-
-            container.appendChild(s);
-
-            setTimeout(() => s.remove(), duration * 1000);
-        }
-
-        setInterval(spawn, 140);
-
-        console.log("✨ lateral flow ativo");
-
-    } catch (e) {
-        console.error("Erro:", e);
+        container.appendChild(snow);
     }
 
-})
+    // animação
+    const style = document.createElement("style");
+    style.innerHTML = `
+    
+    @keyframes snowFall {
+        0% {
+            transform: translateY(-10px) translateX(0);
+        }
+        50% {
+            transform: translateY(50vh) translateX(10px);
+        }
+        100% {
+            transform: translateY(110vh) translateX(-10px);
+        }
+    }
+
+    `;
+
+    document.head.appendChild(style);
+
+    console.log("Snow effect carregado ❄️");
+
+});
 
 jQuery(async () => {
 
