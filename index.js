@@ -109,22 +109,17 @@ jQuery(async () => {
 
         document.body.appendChild(frame);
 
-        // 🖼️ BORDA PNG OVERLAY
+// 🖼️ BORDA PNG PERFEITA (SEM DISTORÇÃO)
 const overlay = document.createElement("div");
 
 overlay.style.position = "absolute";
 overlay.style.inset = "0";
 overlay.style.pointerEvents = "none";
-overlay.style.zIndex = "9997"; // acima de tudo
+overlay.style.zIndex = "9997";
 
-overlay.style.backgroundImage = "url('https://file.garden/abCiFnQil12ZnGUC/file_0000000085a8720e917b8d77403a0c30.png')";
-overlay.style.backgroundSize = "cover";
-overlay.style.backgroundRepeat = "no-repeat";
-overlay.style.backgroundPosition = "center";
-
-// suaviza pra misturar com o rosa
-overlay.style.opacity = "0.9";
-overlay.style.mixBlendMode = "screen";
+// transforma imagem em moldura real
+overlay.style.border = "20px solid transparent";
+overlay.style.borderImage = "url('https://file.garden/abCiFnQil12ZnGUC/file_0000000085a8720e917b8d77403a0c30.png') 30 stretch";
 
 frame.appendChild(overlay);
 
