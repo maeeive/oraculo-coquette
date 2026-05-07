@@ -366,61 +366,6 @@ jQuery(async () => {
         console.error(e);
     }
 
-})
-
-jQuery(async () => {
-
-    console.log("Hybrid Animation 💗");
-
-    try {
-
-        if (document.getElementById("coquette-hybrid")) return;
-
-        await new Promise(r => setTimeout(r, 800));
-
-        const style = document.createElement("style");
-        style.id = "coquette-hybrid";
-
-        style.innerHTML = `
-
-        @keyframes coquetteHybrid {
-            0% {
-                opacity: 0;
-                transform: translateY(20px) scale(0.98);
-                filter: blur(4px);
-                clip-path: inset(0 100% 0 0);
-            }
-
-            60% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                filter: blur(1px);
-                clip-path: inset(0 20% 0 0);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                filter: blur(0);
-                clip-path: inset(0 0 0 0);
-            }
-        }
-
-        /* 💬 aplica só no texto */
-        .mes_text {
-            animation: coquetteHybrid 0.9s ease-out;
-        }
-
-        `;
-
-        document.head.appendChild(style);
-
-        console.log("Hybrid ativo ✨");
-
-    } catch (e) {
-        console.error(e);
-    }
-
 });
 
 // ✦ LINHA ESTRELA + LUA
