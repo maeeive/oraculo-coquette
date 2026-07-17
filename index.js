@@ -234,49 +234,6 @@ document.head.appendChild(styleCorners);
 });
 
         // =========================
-        // ✦ FAIRY DUST
-        // =========================
-        const dust = document.createElement("div");
-        dust.id = "coquette-dust";
-
-        dust.style.position = "fixed";
-        dust.style.top = "0";
-        dust.style.left = "0";
-        dust.style.width = "100vw";
-        dust.style.height = "100vh";
-        dust.style.pointerEvents = "none";
-        dust.style.zIndex = "9994"; // abaixo da borda
-
-        document.body.appendChild(dust);
-
-        const COUNT = 25;
-
-        for (let i = 0; i < COUNT; i++) {
-
-            const spark = document.createElement("div");
-
-            spark.innerText = "✦";
-
-            const size = Math.random() * 5 + 6;
-            const duration = Math.random() * 10 + 10;
-
-            spark.style.position = "absolute";
-            spark.style.top = "-10px";
-            spark.style.left = Math.random() * 100 + "%";
-
-            spark.style.fontSize = size + "px";
-            spark.style.opacity = Math.random() * 0.4 + 0.3;
-
-            spark.style.color = "#ffffff";
-            spark.style.textShadow = "0 0 6px rgba(255,255,255,0.8)";
-
-            spark.style.animation = `fall ${duration}s linear infinite`;
-            spark.style.animationDelay = (Math.random() * 10) + "s";
-
-            dust.appendChild(spark);
-        }
-
-        // =========================
         // 🎞️ ANIMAÇÃO
         // =========================
         const style = document.createElement("style");
@@ -299,3 +256,58 @@ document.head.appendChild(styleCorners);
     }
 
 });
+
+// ✦ LINHA ESTRELA + LUA
+setTimeout(() => {
+
+    const avatar = document.querySelector(".mes_avatar img");
+
+    if (!avatar) {
+        console.log("avatar não encontrado");
+        return;
+    }
+
+    const deco = document.createElement("div");
+
+    deco.innerHTML = `
+        ✦
+        <div class="line"></div>
+        <div class="line small"></div>
+        ☾
+        <div class="line"></div>
+        ✧
+    `;
+
+    deco.style.position = "absolute";
+    deco.style.left = "50%";
+    deco.style.transform = "translateX(-50%)";
+    deco.style.top = "100%";
+
+    deco.style.display = "flex";
+    deco.style.flexDirection = "column";
+    deco.style.alignItems = "center";
+    deco.style.gap = "3px";
+
+    deco.style.color = "#ffd6e0";
+    deco.style.fontSize = "12px";
+    deco.style.textShadow = "0 0 6px rgba(255,182,193,0.8)";
+
+    // estilo das linhas
+    const style = document.createElement("style");
+    style.innerHTML = `
+    .line {
+        width: 1px;
+        height: 10px;
+        background: rgba(255,182,193,0.5);
+    }
+    .line.small {
+        height: 6px;
+        opacity: 0.6;
+    }
+    `;
+    document.head.appendChild(style);
+
+    avatar.parentElement.style.position = "relative";
+    avatar.parentElement.appendChild(deco);
+
+}, 1500);
