@@ -109,37 +109,6 @@ jQuery(async () => {
 
         document.body.appendChild(frame);
         
-// 🖼️ BORDA PNG (VERSÃO SUPERIOR)
-const overlay = document.createElement("div");
-
-overlay.style.position = "absolute";
-
-// sobe mais pra cima
-overlay.style.top = "-19px";
-overlay.style.left = "50%";
-overlay.style.transform = "translateX(-50%)";
-
-// largura maior que a tela (leve expansão lateral)
-overlay.style.width = "110vw";
-
-// altura só metade da tela
-overlay.style.height = "50vh";
-
-overlay.style.pointerEvents = "none";
-overlay.style.zIndex = "9997";
-
-overlay.style.backgroundImage = "url('https://file.garden/abCiFnQil12ZnGUC/file_0000000085a8720e917b8d77403a0c30.png')";
-overlay.style.backgroundRepeat = "no-repeat";
-overlay.style.backgroundPosition = "top center";
-
-// evita deformar
-overlay.style.backgroundSize = "contain";
-
-// mistura com a borda rosa
-overlay.style.opacity = "0.9";
-overlay.style.mixBlendMode = "screen";
-
-frame.appendChild(overlay);
         
         // 🎀 CANTOS COQUETTE (VERSÃO BONITA)
 const styleCorners = document.createElement("style");
